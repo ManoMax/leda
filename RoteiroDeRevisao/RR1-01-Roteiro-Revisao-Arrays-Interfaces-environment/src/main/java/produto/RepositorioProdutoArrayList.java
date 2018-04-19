@@ -17,7 +17,7 @@ public class RepositorioProdutoArrayList {
 	 * A estrutura onde os produtos sao mantidos. Voce nao precisa se preocupar
 	 * por enquanto com o uso de generics em ArrayList.
 	 */
-	private ArrayList produtos;
+	private ArrayList<Produto> produtos;
 
 	/**
 	 * A posicao do ultimo elemento inserido no array de produtos. o valor
@@ -27,7 +27,7 @@ public class RepositorioProdutoArrayList {
 
 	public RepositorioProdutoArrayList(int size) {
 		super();
-		this.produtos = new ArrayList();
+		this.produtos = new ArrayList<>();
 	}
 
 	/**
@@ -40,6 +40,13 @@ public class RepositorioProdutoArrayList {
 	 * @return
 	 */
 	private int procurarIndice(int codigo) {
+		
+		int indice = -1;
+		boolean achou = false;
+		
+		while ()
+		
+		
 		// TODO Implement your code here
 		throw new UnsupportedOperationException("Not implemented yet!");
 	}
