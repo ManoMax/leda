@@ -12,13 +12,13 @@ public class RepositorioConta {
 		contas = new ContaAbstrata[20];
 	}
 
-	private int procurarIndice(ContaAbstrata cli) {
+	private int procurarIndice(ContaAbstrata cliente) {
 		int i = 0;
 		int resp = -1;
 		boolean achou = false;
 
 		while ((i < indice) && !achou) {
-			if ((contas[i]).equals(cli)) {
+			if ((contas[i]).equals(cliente)) {
 				resp = i;
 				achou = true;
 			}
@@ -27,10 +27,10 @@ public class RepositorioConta {
 		return resp;
 	}
 
-	public boolean existe(ContaAbstrata cli) {
+	public boolean existe(ContaAbstrata cliente) {
 		boolean resp = false;
 
-		int i = this.procurarIndice(cli);
+		int i = this.procurarIndice(cliente);
 		if (i != -1) {
 			resp = true;
 		}
@@ -40,7 +40,7 @@ public class RepositorioConta {
 
 	public void inserir(ContaAbstrata novoCliente) {
 		contas[indice] = novoCliente;
-		indice = indice + 1;
+		this.indice++;
 	}
 
 	public void atualizar(ContaAbstrata cliente) {
@@ -52,9 +52,9 @@ public class RepositorioConta {
 		}
 	}
 
-	public ContaAbstrata procurar(ContaAbstrata cli) {
+	public ContaAbstrata procurar(ContaAbstrata cliente) {
 		ContaAbstrata resp = null;
-		int i = this.procurarIndice(cli);
+		int i = this.procurarIndice(cliente);
 		if (i != -1) {
 			resp = contas[i];
 		} else {
@@ -64,8 +64,8 @@ public class RepositorioConta {
 		return resp;
 	}
 
-	public void remover(ContaAbstrata cli) {
-		int i = this.procurarIndice(cli);
+	public void remover(ContaAbstrata cliente) {
+		int i = this.procurarIndice(cliente);
 		if (i != -1) {
 			contas[i] = contas[indice - 1];
 			contas[indice - 1] = null;

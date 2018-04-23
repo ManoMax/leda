@@ -8,6 +8,7 @@ public class ContaBonificada extends Conta {
 
   public ContaBonificada(String numero, double saldo, Cliente cliente) {
     super(numero,saldo,cliente);
+    this.bonus = 0;
   }
 
   /**
@@ -15,7 +16,7 @@ public class ContaBonificada extends Conta {
    * @param valor o valor a ser creditado.
    */
   public void creditar(double valor){
-    bonus = bonus + valor;
+    this.bonus = bonus + valor;
     super.creditar(valor);
   }
 
