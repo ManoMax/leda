@@ -40,6 +40,7 @@ public class Vetor {
 
 	// Insere um objeto no vetor
 	public void inserir(Object o) {
+		
 		// TODO Remove the exception and implement your code
 		throw new UnsupportedOperationException("Not implemented yet!");
 	}

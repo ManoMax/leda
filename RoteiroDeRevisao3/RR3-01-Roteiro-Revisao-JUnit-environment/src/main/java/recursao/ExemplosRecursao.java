@@ -58,7 +58,7 @@ public class ExemplosRecursao {
 	private int minimumRecursive(int[] array, int posicao) {
 		int minimum = array[0]; //valor base a ser retornado
 		if(posicao == array.length-1){ //caso base 
-			//nao faz nada porque minimum já guarda o valor a ser retornado
+			if (array[posicao] < minimum) minimum = array[posicao];
 		}else{
 			int proxMin = minimumRecursive(array, posicao + 1);
 			if(proxMin < minimum){
