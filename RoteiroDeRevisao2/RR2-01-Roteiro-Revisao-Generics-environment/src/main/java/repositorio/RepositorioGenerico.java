@@ -36,8 +36,8 @@ public class RepositorioGenerico {
 		return resp;
 	}
 
-	public void inserir(Object novo) {
-		array[indice] = novo;
+	public void inserir(Object novoObjeto) {
+		array[indice] = novoObjeto;
 		indice = indice + 1;
 	}
 
