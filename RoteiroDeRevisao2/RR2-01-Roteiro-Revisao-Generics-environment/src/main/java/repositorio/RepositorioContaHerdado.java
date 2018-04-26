@@ -14,9 +14,9 @@ public class RepositorioContaHerdado extends RepositorioGenerico {
 	}
 
 	@Override
-	public void inserir(Object novo) {
-		if(novo instanceof ContaAbstrata){
-			super.inserir(novo);
+	public void inserir(Object novoObjeto) {
+		if(novoObjeto instanceof ContaAbstrata){
+			super.inserir(novoObjeto);
 		}
 	}
 

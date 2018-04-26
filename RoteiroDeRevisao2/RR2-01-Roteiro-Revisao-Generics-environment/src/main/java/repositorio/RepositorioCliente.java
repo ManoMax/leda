@@ -12,13 +12,13 @@ public class RepositorioCliente {
 		clientes = new Cliente[20];
 	}
 
-	private int procurarIndice(Cliente cli) {
+	private int procurarIndice(Cliente cliente) {
 		int i = 0;
 		int resp = -1;
 		boolean achou = false;
 
 		while ((i < indice) && !achou) {
-			if ((clientes[i]).equals(cli)) {
+			if ((clientes[i]).equals(cliente)) {
 				resp = i;
 				achou = true;
 			}
@@ -27,10 +27,10 @@ public class RepositorioCliente {
 		return resp;
 	}
 
-	public boolean existe(Cliente cli) {
+	public boolean existe(Cliente cliente) {
 		boolean resp = false;
 
-		int i = this.procurarIndice(cli);
+		int i = this.procurarIndice(cliente);
 		if (i != -1) {
 			resp = true;
 		}
@@ -52,9 +52,9 @@ public class RepositorioCliente {
 		}
 	}
 
-	public Cliente procurar(Cliente cli) {
+	public Cliente procurar(Cliente cliente) {
 		Cliente resp = null;
-		int i = this.procurarIndice(cli);
+		int i = this.procurarIndice(cliente);
 		if (i != -1) {
 			resp = clientes[i];
 		} else {
@@ -64,8 +64,8 @@ public class RepositorioCliente {
 		return resp;
 	}
 
-	public void remover(Cliente cli) {
-		int i = this.procurarIndice(cli);
+	public void remover(Cliente cliente) {
+		int i = this.procurarIndice(cliente);
 		if (i != -1) {
 			clientes[i] = clientes[indice - 1];
 			clientes[indice - 1] = null;
