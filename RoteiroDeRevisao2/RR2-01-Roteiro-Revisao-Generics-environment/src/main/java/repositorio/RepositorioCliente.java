@@ -40,7 +40,7 @@ public class RepositorioCliente {
 
 	public void inserir(Cliente novoCliente) {
 		clientes[indice] = novoCliente;
-		indice = indice + 1;
+		this.indice++;
 	}
 
 	public void atualizar(Cliente cliente) {

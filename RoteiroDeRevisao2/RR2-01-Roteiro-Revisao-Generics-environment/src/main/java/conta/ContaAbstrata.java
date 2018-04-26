@@ -33,7 +33,7 @@ public abstract class ContaAbstrata {
   }
 
   public double getSaldo() {
-    return saldo;
+    return this.saldo;
   }
 
   public void setCliente(Cliente cliente) {

@@ -60,4 +60,11 @@ public class Produto {
 		return result;
 	}
 
+	@Override
+	public String toString() {
+		return getCodigo() + " - " +
+			   getNome() + " - " +
+			   getNome() + " - " +
+			   getPreco();
+	}
 }
