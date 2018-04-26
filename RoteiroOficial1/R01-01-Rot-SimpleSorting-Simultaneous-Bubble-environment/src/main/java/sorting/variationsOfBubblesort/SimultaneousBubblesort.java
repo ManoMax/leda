@@ -11,10 +11,10 @@ import sorting.AbstractSorting;
  * from index 1 to index N-2. And so on. The execution continues until the array
  * is completely ordered.
  */
-public class SimultaneousBubblesort<T extends Comparable<T>> extends
-		AbstractSorting<T> {
-	public void sort(T[] array, int leftIndex, int rightIndex) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
-	}
+public class SimultaneousBubblesort<T extends Comparable<T>> extends AbstractSorting<T> {
+   public void sort(T[] array, int leftIndex, int rightIndex) {
+
+      // TODO Auto-generated method stub
+      throw new UnsupportedOperationException("Not implemented yet!");
+   }
 }
