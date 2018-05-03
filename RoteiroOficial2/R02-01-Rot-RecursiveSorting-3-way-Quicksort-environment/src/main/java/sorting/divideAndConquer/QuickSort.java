@@ -27,21 +27,29 @@ public class QuickSort<T extends Comparable<T>> extends AbstractSorting<T> {
 	private int particao(T[] array,int l,int r) {
 		
 		int pivot = (int) array[l];
+		System.out.println(pivot);
+		int i = l+1;
+		int j = r;
 		
-		int i = l;
-		
-		for (int j = l+1; j < array.length; j++) {
+		while (i <= j) {
 			
-			if ((int) array[j] <= pivot) {
-				
-				i++;
-				Util.swap(array, i, j);
-			}
-			Util.swap(array, l, i);
 		}
 		
+		Util.swap(array, l, i);
+		
+		System.out.println("i: " + i);
 		return i;
 	}
+	
+	public String exibir(T[] array) {
+		
+		String saida = "";
+		for (int i = 0; i < array.length; i++) saida += array[i] + " ";		
+		return saida + "\n";
+		
+		
+	}
+	
 	
 	
 }
