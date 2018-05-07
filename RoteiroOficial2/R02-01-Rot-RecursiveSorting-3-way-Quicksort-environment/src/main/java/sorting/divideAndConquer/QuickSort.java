@@ -41,7 +41,7 @@ public class QuickSort<T extends Comparable<T>> extends AbstractSorting<T> {
 		return i;
 	}
 	
-	public String exibir(T[] array) {
+	public String exibirArray(T[] array) {
 		
 		String saida = "";
 		for (int i = 0; i < array.length; i++) saida += array[i] + " ";		
