@@ -32,14 +32,14 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSorting<T> {
 		int tamanho1 = n - leftIndex + 1;
 		int tamanho2 = rightIndex - n;
 		
-		T[] L = (T[]) new Object[tamanho1];
-		T[] R = (T[]) new Object[tamanho2];
+		T[] leftList = (T[]) new Comparable[tamanho1];
+		T[] rightList = (T[]) new Comparable[tamanho2];
 		
 		for (int i = 0; i < tamanho1; i++) {
-			L[i] = array[i];
+			leftList[i] = array[i];
 		}
 		for (int j = 0; j < tamanho2; j++) {
-			R[j] = array[j];
+			rightList[j] = array[j];
 		}
 		
 		int p = 0, q = 0;
@@ -48,23 +48,23 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSorting<T> {
 		
 		while (p < tamanho1 && q < tamanho2) {
 			
-			if ((int) L[p] <= (int)  R[q]) {
-				array[k] = L[p];
+			if (leftList[p].compareTo(rightList[q]) <= 0) {
+				array[k] = leftList[p];
 				p++;
 			} else {
-				array[k] = R[q];
+				array[k] = rightList[q];
 				q++;
 			} k++;
 		}
 		
 		while (p < tamanho1) {
-			array[k] = L[p];
+			array[k] = leftList[p];
 			p++;
 			k++;
 		}
 		
 		while (q < tamanho2) {
-			array[k] = R[q];
+			array[k] = rightList[q];
 			q++;
 			k++;
 		}
