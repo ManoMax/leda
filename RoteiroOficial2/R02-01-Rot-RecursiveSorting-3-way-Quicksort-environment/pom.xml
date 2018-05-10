@@ -116,7 +116,8 @@
 								qualified name = nome com o pacote) -->
 							<qualifiedNames>
 								<!-- name>sorting.divideAndConquer.QuickSort</name -->
-								<name>sorting.divideAndConquer.MergeSort</name>
+								<!-- name>sorting.divideAndConquer.MergeSort</name -->
+								<name>sorting.divideAndConquer.threeWayQuicksort.ThreeWayQuickSort</name>
 								<!-- name>sorting.simpleSorting.BubbleSort</name -->
 								<!-- name>sorting.simpleSorting.SelectionSort</name -->
 								<!-- name>sorting.simpleSorting.InsertionSort</name -->
