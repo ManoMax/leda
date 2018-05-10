@@ -1,6 +1,7 @@
 package sorting.divideAndConquer.threeWayQuicksort;
 
 import sorting.AbstractSorting;
+import util.Util;
 
 public class ThreeWayQuickSort<T extends Comparable<T>> extends
 		AbstractSorting<T> {
@@ -25,8 +26,48 @@ public class ThreeWayQuickSort<T extends Comparable<T>> extends
 	 **/
 	@Override
 	public void sort(T[] array, int leftIndex, int rightIndex) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		
+		if (leftIndex >= rightIndex) return;
+		if (confereArray(array)) return;
+		
+		if (leftIndex < rightIndex) {
+			int mid = particion(array, leftIndex, rightIndex);
+			sort(array, leftIndex, mid-1);
+			T pivot = array[mid];
+			
+			while (mid < rightIndex && array[mid].compareTo(pivot) == 0) mid++;
+				sort(array, mid, rightIndex);
+			}
 	}
 
+	private int particion(T[] array, int leftIndex, int rightIndex) {
+		
+		int j = leftIndex;
+		int i = leftIndex;
+		while (j < rightIndex) {
+			
+			//System.out.println(array[j] + " " + array[rightIndex]);
+			//System.out.println(array[j].compareTo(array[rightIndex]) < 0);
+			//System.out.println(exibirArray(array));
+			
+		if (array[j].compareTo(array[rightIndex]) < 0) {
+			Util.swap(array, i, j);
+			i++;
+			}
+			j++;
+		}
+		Util.swap(array, i, rightIndex);
+		return i;
+	}
+
+	private String exibirArray(T[] array) {
+		String saida = "";
+		for (int i = 0; i < array.length; i++) saida += array[i] + " ";		
+		return saida + "\n";
+	}
+	
+	private boolean confereArray(T[] array) {
+		return (array == null || array.length == 0);
+	}
+	
 }

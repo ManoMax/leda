@@ -16,40 +16,43 @@ public class QuickSort<T extends Comparable<T>> extends AbstractSorting<T> {
 	@Override
 	public void sort(T[] array, int leftIndex, int rightIndex) {
 		
-		if (leftIndex >= rightIndex) return; 
+		if (leftIndex >= rightIndex) return;
+		if (confereArray(array)) return;
 		
-		int m = particao(array, leftIndex, rightIndex);
+		int mid = particao(array, leftIndex, rightIndex);
 		
-		sort(array, leftIndex, m-1);
-		sort(array, m+1, rightIndex);
+		sort(array, leftIndex, mid-1);
+		sort(array, mid+1, rightIndex);
 	}
 	
-	private int particao(T[] array,int l,int r) {
+	private int particao(T[] array,int leftIndex,int rightIndex) {
 		
-		int pivot = (int) array[l];
-		System.out.println(pivot);
-		int i = l+1;
-		int j = r;
+		T pivot = array[leftIndex];
+		
+		int i = leftIndex+1;
+		int j = rightIndex;
 		
 		while (i <= j) {
-			
+			if (array[i].compareTo(pivot) <= 0) i++;
+			else if (array[j].compareTo(pivot) > 0) j--;
+			else {
+				Util.swap(array, i, j);
+			}
 		}
 		
-		Util.swap(array, l, i);
+		Util.swap(array, leftIndex, j);
 		
-		System.out.println("i: " + i);
-		return i;
+		return j;
 	}
 	
-	public String exibirArray(T[] array) {
-		
+	private String exibirArray(T[] array) {
 		String saida = "";
 		for (int i = 0; i < array.length; i++) saida += array[i] + " ";		
 		return saida + "\n";
-		
-		
 	}
 	
-	
+	private boolean confereArray(T[] array) {
+		return (array == null || array.length == 0);
+	}
 	
 }
