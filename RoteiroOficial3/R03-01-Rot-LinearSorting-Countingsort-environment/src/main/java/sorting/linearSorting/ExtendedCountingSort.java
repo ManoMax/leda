@@ -27,7 +27,7 @@ public class ExtendedCountingSort extends AbstractSorting<Integer> {
 		arrayContador = somaDePrefixos(arrayContador);
 		//System.out.println(exibirArray(arrayContador));
 		
-		arrayContador = ordenaArray(array, arrayContador, leftIndex, rightIndex);
+		arrayContador = ordenaArray(array, arrayContador, leftIndex, rightIndex, menorNumero);
 		//System.out.println(exibirArray(arrayContador));
 		
 		modificarArray(array, arrayContador, leftIndex, rightIndex);
@@ -53,7 +53,7 @@ public class ExtendedCountingSort extends AbstractSorting<Integer> {
 		
 		for (int i = 0; i < arrayContador.length; i++) arrayContador[i] = 0;
 		
-		for (int i = 0; i < array.length; i++) arrayContador[array[i]]++;
+		for (int i = 0; i < array.length; i++) arrayContador[array[i]-menorNumero]++;
 		
 		return arrayContador;
 	}
@@ -63,7 +63,7 @@ public class ExtendedCountingSort extends AbstractSorting<Integer> {
 		return arrayContador;
 	}
 	
-	private Integer[] ordenaArray(Integer[] array, Integer[] arrayContador, int leftIndex, int rightIndex) {
+	private Integer[] ordenaArray(Integer[] array, Integer[] arrayContador, int leftIndex, int rightIndex, int menorNumero) {
 		
 		Integer[] aux = new Integer[array.length];
 		
@@ -72,11 +72,11 @@ public class ExtendedCountingSort extends AbstractSorting<Integer> {
 		for (int i = array.length-1; i >= 0 ; i--) {
 			int valorDaArrayOriginal = array[i];
 			
-			arrayContador[array[i]]--;
+			arrayContador[array[i]-menorNumero]--;
 			//System.out.println("Valor Original: " + array[i]);
 			//System.out.println("Contador: " + exibirArray(arrayContador));
 			
-			int posicaoContador = arrayContador[valorDaArrayOriginal];
+			int posicaoContador = arrayContador[valorDaArrayOriginal-menorNumero];
 			//System.out.println("Posicao Cont: " + arrayContador[valorDaArrayOriginal]);
 			
 			aux[posicaoContador] = array[i];
