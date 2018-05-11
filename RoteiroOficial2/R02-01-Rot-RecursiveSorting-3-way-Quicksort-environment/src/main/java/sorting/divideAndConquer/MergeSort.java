@@ -30,17 +30,6 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSorting<T> {
 		
 		//System.out.println(exibirArray(array));
 		
-<<<<<<< HEAD
-		T[] leftList = (T[]) new Comparable[tamanho1];
-		T[] rightList = (T[]) new Comparable[tamanho2];
-		
-		for (int i = 0; i < tamanho1; i++) {
-			leftList[i] = array[i];
-		}
-		for (int j = 0; j < tamanho2; j++) {
-			rightList[j] = array[j];
-		}
-=======
 		int tamanho1 = mid - leftIndex + 1;
 		int tamanho2 = rightIndex - mid;
 		
@@ -49,7 +38,6 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSorting<T> {
 		
 		for (int i = 0; i < tamanho1; i++) metade1[i] = array[leftIndex+i];
 		for (int j = 0; j < tamanho2; j++) metade2[j] = array[mid+1+j];
->>>>>>> 637f8408a1b65ebe5c8e22b95555baa98f74d3d1
 		
 		tamanho1 = 0;
 		tamanho2 = 0;
@@ -60,27 +48,6 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSorting<T> {
 		
 		while (tamanho1 < metade1.length && tamanho2 < metade2.length) {
 			
-<<<<<<< HEAD
-			if (leftList[p].compareTo(rightList[q]) <= 0) {
-				array[k] = leftList[p];
-				p++;
-			} else {
-				array[k] = rightList[q];
-				q++;
-			} k++;
-		}
-		
-		while (p < tamanho1) {
-			array[k] = leftList[p];
-			p++;
-			k++;
-		}
-		
-		while (q < tamanho2) {
-			array[k] = rightList[q];
-			q++;
-			k++;
-=======
 			if (metade1[tamanho1].compareTo(metade2[tamanho2]) <= 0) {
 				array[tamanho3] = metade1[tamanho1];
 				tamanho1++;
@@ -101,8 +68,7 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSorting<T> {
 		while (tamanho2 < metade2.length) {
 			array[tamanho3] = metade2[tamanho2];
 			tamanho2++;
-			tamanho3++;
->>>>>>> 637f8408a1b65ebe5c8e22b95555baa98f74d3d1
+		tamanho3++;
 		}
 		
 		//System.out.println(exibirArray(array));
@@ -119,5 +85,5 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSorting<T> {
 
 	private boolean confereArray(T[] array) {
 		return (array == null || array.length == 0);
-	}
+ 	}
 }
