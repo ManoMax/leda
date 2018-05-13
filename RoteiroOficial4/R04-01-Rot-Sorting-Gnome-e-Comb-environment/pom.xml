@@ -115,6 +115,8 @@
 							<!-- INSIRA OS NOMES COMPLETOS DAS CLASSES A SEREM TESTADAS AQUI (Full 
 								qualified name = nome com o pacote) -->
 							<qualifiedNames>
+								<name>sorting.variationsOfBubblesort.CombSort</name>
+								<name>sorting.variationsOfBubblesort.GnomeSort</name>
 								<!-- name>sorting.simpleSorting.BubbleSort</name -->
 								<!-- name>sorting.simpleSorting.SelectionSort</name -->
 								<!-- name>sorting.simpleSorting.InsertionSort</name -->
