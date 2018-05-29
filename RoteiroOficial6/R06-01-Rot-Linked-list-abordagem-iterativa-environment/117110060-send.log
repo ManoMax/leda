@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2018-05-28T19:22:03.701-0300</date>
+  <logger>GABRIEL MAX VIEIRA MATOS</logger>
+  <level>FINE</level>
+  <message>File 117110060-GABRIEL MAX VIEIRA MATOS.zip was received. It was sent by GABRIEL MAX VIEIRA MATOS from IP 192.168.0.6</message>
+</record>
