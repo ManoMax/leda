@@ -15,10 +15,7 @@ public class StackDoubleLinkedListImpl<T> implements Stack<T> {
 
 	@Override
 	public void push(T element) throws StackOverflowException {
-		if (top.size() < size) {
-			top.insert(element);
-		} else {throw new StackOverflowException();}
-
+		if (top.size() <= size) top.insert(element);
 	}
 
 	@Override
@@ -27,7 +24,7 @@ public class StackDoubleLinkedListImpl<T> implements Stack<T> {
 		if (!(top.isEmpty())) {
 			exit = ((DoubleLinkedListImpl<T>) top).getLast().getData();
 			top.removeLast();
-		} else { throw new StackUnderflowException();}
+		}
 		return exit;
 	}
 

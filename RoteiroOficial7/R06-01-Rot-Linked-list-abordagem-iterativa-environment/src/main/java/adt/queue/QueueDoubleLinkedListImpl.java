@@ -15,7 +15,7 @@ public class QueueDoubleLinkedListImpl<T> implements Queue<T> {
 
 	@Override
 	public void enqueue(T element) throws QueueOverflowException {
-		if (list.size() < this.size) {
+		if (list.size() <= this.size) {
 			list.insert(element);
 		} else throw new QueueOverflowException();
 	}

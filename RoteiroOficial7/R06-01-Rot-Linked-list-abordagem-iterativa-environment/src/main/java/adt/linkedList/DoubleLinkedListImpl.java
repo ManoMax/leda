@@ -15,29 +15,16 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements
 		DoubleLinkedListNode<T> auxHead = (DoubleLinkedListNode<T>) getHead();
 		DoubleLinkedListNode<T> auxLast = getLast();
 		
-		while((auxHead != null) && (auxLast != null) && auxHead != auxLast && auxHead.next != auxLast
+		while(auxHead != auxLast && auxHead.next != auxLast
 			&& auxHead.data!= element && auxLast.data != element) {
 			
 			auxHead = (DoubleLinkedListNode<T>) auxHead.getNext();
 			auxLast = auxLast.getPrevious();
 			}
 		
-		if ((auxHead != null) && auxHead.data == element) return auxHead.getData();
-		if ((auxHead != null) && auxLast.data == element) return auxLast.getData();
+		if (auxHead.data == element) return auxHead.getData();
+		if (auxLast.data == element) return auxLast.getData();
 		return null;
-	}
-
-	@Override
-	public void insert(T element) {
-		if (element != null) {
-			DoubleLinkedListNode<T> newLast = new DoubleLinkedListNode<T>(element, null, new DoubleLinkedListNode<T>());
-			newLast.setPrevious(getLast());
-			
-			getLast().setNext(newLast);
-			
-			if (getLast().isNIL()) setHead(newLast);
-			setLast(newLast);
-		}
 	}
 	
 	@Override
@@ -55,6 +42,19 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements
 	}
 
 	@Override
+	public void insert(T element) {
+		if (element != null) {
+			DoubleLinkedListNode<T> newLast = new DoubleLinkedListNode<T>(element, null, new DoubleLinkedListNode<T>());
+			newLast.setPrevious(getLast());
+			
+			getLast().setNext(newLast);
+			
+			if (getLast().isNIL()) setHead(newLast);
+			setLast(newLast);
+		}
+	}
+	
+	@Override
 	public void removeFirst() {
 		if (!(this.getHead().isNIL())) {
 			this.setHead(getHead().getNext());
@@ -66,13 +66,12 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements
 
 	@Override
 	public void removeLast() {
-		if(!(getLast().isNIL())) {
-			setLast(getLast().getPrevious());
-			if (getLast().isNIL()) {
-				setHead((DoubleLinkedListNode<T>) getLast());
-			}
-			((DoubleLinkedListNode<T>) getLast()).setNext(new DoubleLinkedListNode<T>());
-		} 
+		if(!(this.getLast().isNIL())) {
+			this.setLast(getLast().getPrevious());
+		} else {
+			this.setHead((DoubleLinkedListNode<T>) this.getLast());
+		}
+		((DoubleLinkedListNode<T>) this.getLast()).setNext(new DoubleLinkedListNode<T>());
 	}
 
 	@Override
