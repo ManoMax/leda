@@ -30,8 +30,9 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements
 	@Override
 	public void insert(T element) {
 		if (element != null) {
-			DoubleLinkedListNode<T> newLast = new DoubleLinkedListNode<T>(element, null, new DoubleLinkedListNode<T>());
+			DoubleLinkedListNode<T> newLast = new DoubleLinkedListNode<T>(element, null, null);
 			newLast.setPrevious(getLast());
+			newLast.setNext(new DoubleLinkedListNode<T>());
 			
 			getLast().setNext(newLast);
 			
@@ -41,10 +42,27 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements
 	}
 	
 	@Override
+	public void remove(T element) {
+		if (getHead().getData().equals(element)) {
+			removeFirst();
+		} else {
+			DoubleLinkedListNode<T> aux = getHead();
+			while ((aux != null) && !(aux.isNIL()) && !(aux.getData().equals(element))) {
+				aux = (DoubleLinkedListNode<T>) aux.getNext();
+			}
+			if (!(aux.isNIL())) {
+				aux.getPrevious().setNext(aux.getNext());
+				((DoubleLinkedListNode<T>) aux.getNext()).setPrevious(aux.getPrevious());
+			}
+		}
+	}
+	
+	@Override
 	public void insertFirst(T element) {
 		if (element != null) {
-			DoubleLinkedListNode<T> newHead = new DoubleLinkedListNode<T>(element, new DoubleLinkedListNode<T>(), null);
+			DoubleLinkedListNode<T> newHead = new DoubleLinkedListNode<T>(element, null, null);
 			newHead.setNext(this.getHead());
+			newHead.setPrevious(new DoubleLinkedListNode<T>());
 			
 			if (getHead() instanceof DoubleLinkedListNode) {
 				((DoubleLinkedListNode<T>) getHead()).setPrevious(newHead);}
@@ -72,7 +90,7 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements
 				setHead((DoubleLinkedListNode<T>) getLast());
 			}
 			((DoubleLinkedListNode<T>) getLast()).setNext(new DoubleLinkedListNode<T>());
-		} 
+		}
 	}
 
 	@Override

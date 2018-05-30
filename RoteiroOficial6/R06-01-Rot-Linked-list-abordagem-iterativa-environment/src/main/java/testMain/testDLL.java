@@ -54,18 +54,12 @@ public class testDLL {
         System.out.print(k.search(17) == null ? "." : "F");
         System.out.print(Arrays.toString(k.toArray()).equals("[9, 6, 25, 7, 3]") ? "." : "F");
         k.removeLast();
-
         System.out.print(k.size() == 4 ? "." : "F");
-        
-        System.out.println(Arrays.toString(k.toArray()));
-        System.out.println(k.search(3));
-        
         System.out.print(k.search(3) == null ? "." : "F"); //F
         System.out.print(Arrays.toString(k.toArray()).equals("[9, 6, 25, 7]") ? "." : "F"); //.
         k.removeFirst();
         System.out.print(Arrays.toString(k.toArray()).equals("[6, 25, 7]") ? "." : "F"); //.
         k.removeLast();
-        System.out.println(Arrays.toString(k.toArray()));
         System.out.print(Arrays.toString(k.toArray()).equals("[6, 25]") ? "." : "F"); //F
         k.removeFirst();
         System.out.print(Arrays.toString(k.toArray()).equals("[25]") ? "." : "F"); //F
