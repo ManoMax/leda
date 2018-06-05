@@ -13,6 +13,7 @@ public class StackTestes {
 		System.out.println("Removendo de Pilha vazia");
 		System.out.print(stack.isEmpty() == true ? "." : "F");
 		System.out.print(stack.isFull() == false  ? "." : "F");
+		System.out.print(stack.top() == null ? "." : "F");
 		try{ stack.pop(); } catch (StackUnderflowException e){System.out.print(".");}
 		System.out.println("");
 		

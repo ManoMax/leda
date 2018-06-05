@@ -29,14 +29,16 @@ public class RecursiveDoubleLinkedListImpl<T> extends
 	
 	@Override
 	public void insert(T element) {
-		if (element == null) return;
-		if (isEmpty()) {
-			setData(element);
-			setNext(new RecursiveDoubleLinkedListImpl<T>());
-			((RecursiveDoubleLinkedListImpl<T>) getNext()).setPrevious(this);
-			
-			if (getPrevious() == null) setPrevious(new RecursiveDoubleLinkedListImpl<T>());
-		} else getNext().insert(element);
+		if (element != null) {
+			if (isEmpty()) {
+				setData(element);
+				setNext(new RecursiveDoubleLinkedListImpl<T>());
+				((RecursiveDoubleLinkedListImpl<T>) getNext()).setPrevious(this);
+				
+				if (getPrevious() == null) setPrevious(new RecursiveDoubleLinkedListImpl<T>());
+			} else getNext().insert(element);
+		}
+		
 	}
 	
 	@Override
@@ -70,17 +72,19 @@ public class RecursiveDoubleLinkedListImpl<T> extends
 
 	@Override
 	public void remove(T element) {
-		if (!(isEmpty())) {
-			if(getData() == element) {
-				if(getPrevious().isEmpty() && getNext().isEmpty()) {
-					setData(null); setNext(null); setPrevious(null);
-				} else {
-					setData(getNext().getData());
-					setNext(getNext().getNext());
-					
-					if(next!= null) ((RecursiveDoubleLinkedListImpl<T>) getNext()).setPrevious(this);
-				}
-			} else getNext().remove(element);
+		if (element != null) {
+			if (!(isEmpty())) {
+				if(getData() == element) {
+					if(getPrevious().isEmpty() && getNext().isEmpty()) {
+						setData(null); setNext(null); setPrevious(null);
+					} else {
+						setData(getNext().getData());
+						setNext(getNext().getNext());
+						
+						if(next!= null) ((RecursiveDoubleLinkedListImpl<T>) getNext()).setPrevious(this);
+					}
+				} else getNext().remove(element);
+			}
 		}
 	}
 	
@@ -92,8 +96,11 @@ public class RecursiveDoubleLinkedListImpl<T> extends
 		this.previous = previous;
 	}
 
-	public T getFirst() {
-		if (getPrevious().getData() != null) return getPrevious().getFirst();
-		else return getData();
+	public T getLast() {
+		if (getNext().getData() != null) {
+			return ((RecursiveDoubleLinkedListImpl<T>) getNext()).getLast();
+		} else {
+			return getData();
+		}
 	}
 }

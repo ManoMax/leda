@@ -28,7 +28,7 @@ public class DoubleTestes {
 		System.out.print(list.size() == 1 ? "." : "F");
 		System.out.print(list.search(9) == 9 ? "." : "F");
 		System.out.print(Arrays.toString(list.toArray()).equals("[9]") ? "." : "F");
-		System.out.print(list.getFirst().equals(9) ? "." : "F");
+		System.out.print(list.getLast().equals(9) ? "." : "F");
 		System.out.println("");
 		
 		// Acrescentando 2º Elemento na Primeira Posicao
@@ -37,7 +37,7 @@ public class DoubleTestes {
 		System.out.print(list.size() == 2 ? "." : "F");
 		System.out.print(list.search(9) == 9 ? "." : "F");
 		System.out.print(Arrays.toString(list.toArray()).equals("[17, 9]") ? "." : "F");
-		System.out.print(list.getFirst().equals(17) ? "." : "F");
+		System.out.print(list.getLast().equals(17) ? "." : "F");
 		System.out.println("");
 		
 		// Acrescentando 3º Elemento na Primeira Posicao
@@ -46,7 +46,7 @@ public class DoubleTestes {
 		System.out.print(list.size() == 3 ? "." : "F");
 		System.out.print(list.search(12) == 12 ? "." : "F");
 		System.out.print(Arrays.toString(list.toArray()).equals("[12, 17, 9]") ? "." : "F");
-		System.out.print(list.getFirst().equals(12) ? "." : "F");
+		System.out.print(list.getLast().equals(12) ? "." : "F");
 		System.out.println("");
 		
 		// Removendo Primeira Posicao

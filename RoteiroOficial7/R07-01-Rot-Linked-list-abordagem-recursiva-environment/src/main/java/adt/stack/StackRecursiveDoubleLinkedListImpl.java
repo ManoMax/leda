@@ -15,23 +15,25 @@ public class StackRecursiveDoubleLinkedListImpl<T> implements Stack<T> {
 
 	@Override
 	public void push(T element) throws StackOverflowException {
-		if (top.size() < size)	top.insertFirst(element);
-		else throw new StackOverflowException();
+		if (isFull()) throw new StackOverflowException();
+		else top.insert(element);
 	}
 
 	@Override
 	public T pop() throws StackUnderflowException {
-		if (!(top.isEmpty())) {
-			T firstElement = ((RecursiveDoubleLinkedListImpl<T>) top).getFirst();
-			top.removeFirst();
-			return firstElement;
+		if (top.isEmpty()) throw new StackUnderflowException();
+		else {
+			T lastElement = ((RecursiveDoubleLinkedListImpl<T>) top).getLast();
+			top.removeLast();
+			return lastElement;
 		}
-		else throw new StackUnderflowException();
 	}
 
-	@Override
 	public T top() {
-		return ((RecursiveDoubleLinkedListImpl<T>) top).getFirst();
+		if (!(isEmpty())) {
+			return ((RecursiveDoubleLinkedListImpl<T>) top).getLast();
+		}
+		return null;
 	}
 
 	@Override
