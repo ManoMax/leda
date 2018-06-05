@@ -1,12 +1,15 @@
-package adt.stack;
+package test.stack;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import adt.stack.Stack;
+import adt.stack.StackRecursiveDoubleLinkedListImpl;
+import adt.stack.StackOverflowException;
+import adt.stack.StackUnderflowException;
 
 public class StudentStackTest {
 
@@ -19,7 +22,7 @@ public class StudentStackTest {
 
 		getImplementations();
 
-		// Pilha com 3 elementos nÃ£o cheia.
+		// Pilha com 3 elementos não cheia.
 		stack1.push(1);
 		stack1.push(2);
 		stack1.push(3);
@@ -31,13 +34,13 @@ public class StudentStackTest {
 	}
 
 	private void getImplementations() {
-		// TODO O aluno deve ajustar aqui para instanciar sua implementaÃ§Ã£o
-		stack1 = null;
-		stack2 = null;
-		stack3 = null;
+		// TODO O aluno deve ajustar aqui para instanciar sua implementação
+		stack1 = new StackRecursiveDoubleLinkedListImpl<Integer>(4);
+		stack2 = new StackRecursiveDoubleLinkedListImpl<Integer>(10);
+		stack3 = new StackRecursiveDoubleLinkedListImpl<Integer>(5);
 	}
 
-	// MÃ‰TODOS DE TESTE
+	// MÉTODOS DE TESTE
 	@Test
 	public void testTop() {
 		assertEquals(new Integer(3), stack1.top());
@@ -66,8 +69,8 @@ public class StudentStackTest {
 
 	@Test(expected = StackOverflowException.class)
 	public void testPushComErro() throws StackOverflowException {
-		stack1.push(new Integer(5)); // levanta excecao apenas se o tamanhonao
-										// permitir outra insercao
+		stack1.push(7);
+		stack1.push(new Integer(5));
 	}
 
 	@Test
@@ -82,7 +85,6 @@ public class StudentStackTest {
 
 	@Test(expected = StackUnderflowException.class)
 	public void testPopComErro() throws StackUnderflowException {
-		assertEquals(new Integer(3), stack1.pop()); // levanta excecao apenas se
-													// stack1 for vazia
+		assertEquals(new Integer(3), stack3.pop()); 
 	}
 }

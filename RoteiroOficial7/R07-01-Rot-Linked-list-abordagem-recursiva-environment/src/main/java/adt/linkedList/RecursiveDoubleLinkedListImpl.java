@@ -18,22 +18,72 @@ public class RecursiveDoubleLinkedListImpl<T> extends
 
 	@Override
 	public void insertFirst(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (element != null) {
+			RecursiveDoubleLinkedListImpl<T> newSecond = new RecursiveDoubleLinkedListImpl<T>(getData(), getNext(), this);
+			setPrevious(new RecursiveDoubleLinkedListImpl<T>());
+			setData(element);
+			setNext(newSecond);
+			((RecursiveDoubleLinkedListImpl<T>) getNext()).setPrevious(this);
+		}
 	}
-
+	
+	@Override
+	public void insert(T element) {
+		if (element == null) return;
+		if (isEmpty()) {
+			setData(element);
+			setNext(new RecursiveDoubleLinkedListImpl<T>());
+			((RecursiveDoubleLinkedListImpl<T>) getNext()).setPrevious(this);
+			
+			if (getPrevious() == null) setPrevious(new RecursiveDoubleLinkedListImpl<T>());
+		} else getNext().insert(element);
+	}
+	
 	@Override
 	public void removeFirst() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (!(isEmpty())) {
+			setPrevious(new RecursiveDoubleLinkedListImpl<T>());
+			setData(getNext().getData());
+			setNext(getNext().getNext());
+		}
 	}
 
 	@Override
 	public void removeLast() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (!(isEmpty())) {
+			buscaRemoveUltimo(this);
+		}
 	}
 
+	private void buscaRemoveUltimo(RecursiveDoubleLinkedListImpl<T> node) {
+		if (node.getNext().getData() == null) {
+			if (node.getPrevious().getData() == null) {
+				node.setData(null);
+				node.setPrevious(new RecursiveDoubleLinkedListImpl<T>());
+			} else {
+				node.getPrevious().setNext(new RecursiveDoubleLinkedListImpl<T>());
+			}
+		} else {
+			buscaRemoveUltimo((RecursiveDoubleLinkedListImpl<T>) node.getNext());
+		}
+	}
+
+	@Override
+	public void remove(T element) {
+		if (!(isEmpty())) {
+			if(getData() == element) {
+				if(getPrevious().isEmpty() && getNext().isEmpty()) {
+					setData(null); setNext(null); setPrevious(null);
+				} else {
+					setData(getNext().getData());
+					setNext(getNext().getNext());
+					
+					if(next!= null) ((RecursiveDoubleLinkedListImpl<T>) getNext()).setPrevious(this);
+				}
+			} else getNext().remove(element);
+		}
+	}
+	
 	public RecursiveDoubleLinkedListImpl<T> getPrevious() {
 		return previous;
 	}
@@ -42,4 +92,8 @@ public class RecursiveDoubleLinkedListImpl<T> extends
 		this.previous = previous;
 	}
 
+	public T getFirst() {
+		if (getPrevious().getData() != null) return getPrevious().getFirst();
+		else return getData();
+	}
 }

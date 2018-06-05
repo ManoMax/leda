@@ -11,46 +11,75 @@ public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
 
 	public RecursiveSingleLinkedListImpl(T data,
 			RecursiveSingleLinkedListImpl<T> next) {
-		this.data = data;
-		this.next = next;
+		setData(data);
+		setNext(next);
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		return (getData() == null);
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (isEmpty()) return 0;
+		else return 1 + next.size();
 	}
 
 	@Override
 	public T search(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (!(element == null)) {
+			if (isEmpty()) return null;
+			else {
+				if (data == element) return getData();
+				else return next.search(element);
+			}
+		} return null;
 	}
 
 	@Override
 	public void insert(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (!(element == null)) {
+			if (isEmpty()) {
+				setData(element);
+				setNext(new RecursiveSingleLinkedListImpl<T>());
+			} else next.insert(element);
+		}
 	}
 
 	@Override
 	public void remove(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (isEmpty()) {
+			//Não há o que remover
+		} else {
+			if (getData() == element) {
+				setData(next.getData());
+				setNext(next.getNext());
+			} else next.remove(element);
+		}
 	}
 
 	@Override
 	public T[] toArray() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		T[] array = initializeArray();
+		toArray(array, this, 0);
+		return array;
 	}
-
+	
+	public T[] toArray(T[] array, RecursiveSingleLinkedListImpl<T> node, int position) {
+		if (node == null) return array;
+		if (node.isEmpty()) return array;
+		else {
+			array[position++] = node.getData();
+			return toArray(array, node.getNext(), position);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	private T[] initializeArray() {
+		return (T[]) new Object[size()];
+	}
+	
 	public T getData() {
 		return data;
 	}
