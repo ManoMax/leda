@@ -59,10 +59,11 @@ public class HashtableClosedAddressImpl<T> extends AbstractHashtableClosedAddres
 
    @Override
    public void insert(T element) {
-	  
-      if (this.table instanceof LinkedList[]) {
-    	  
-      }
+	  if (element != null) {
+		  if (this.table instanceof LinkedList[]) {
+	    	  
+	      }
+	  }
    }
 
    @Override
