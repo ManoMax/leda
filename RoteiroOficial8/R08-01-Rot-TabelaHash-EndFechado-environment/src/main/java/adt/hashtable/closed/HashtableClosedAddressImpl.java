@@ -62,7 +62,6 @@ public class HashtableClosedAddressImpl<T> extends AbstractHashtableClosedAddres
    
    @Override
    public void insert(T element) {
-<<<<<<< HEAD:RoteiroOficial8/RoteiroOficial8/R08-01-Rot-TabelaHash-EndFechado-environment/src/main/java/adt/hashtable/closed/HashtableClosedAddressImpl.java
 	   if (element != null) {
 		   if (this.search(element) == null) {
 			   if (!getLinkedList(element).isEmpty()) {
@@ -90,13 +89,6 @@ public class HashtableClosedAddressImpl<T> extends AbstractHashtableClosedAddres
 		   }
 	   }
 	   return exit;
-=======
-	  if (element != null) {
-		  if (this.table instanceof LinkedList[]) {
-	    	  
-	      }
-	  }
->>>>>>> 5cb6b74d1d26c6663b2d3dd18bfe53ecec5da853:RoteiroOficial8/R08-01-Rot-TabelaHash-EndFechado-environment/src/main/java/adt/hashtable/closed/HashtableClosedAddressImpl.java
    }
 
    @Override

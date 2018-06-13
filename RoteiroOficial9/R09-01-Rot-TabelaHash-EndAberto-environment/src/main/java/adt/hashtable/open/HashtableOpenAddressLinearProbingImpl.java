@@ -1,7 +1,9 @@
 package adt.hashtable.open;
 
+import adt.hashtable.hashfunction.HashFunctionClosedAddress;
 import adt.hashtable.hashfunction.HashFunctionClosedAddressMethod;
 import adt.hashtable.hashfunction.HashFunctionLinearProbing;
+import adt.hashtable.hashfunction.HashFunctionOpenAddress;
 
 public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 		AbstractHashtableOpenAddress<T> {
@@ -13,10 +15,31 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 		this.initiateInternalTable(size);
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public void insert(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (element != null) {
+			
+			int i = 0;
+			boolean notInsert = true;
+			
+			while (notInsert) {
+				if (hashFunction instanceof HashFunctionOpenAddress) {
+					int hash = Math.abs(((HashFunctionOpenAddress<T>) hashFunction).hash(element, i));
+					
+					if (this.table[hash] == null) {
+						this.table[hash] = element;
+						notInsert = false;
+					} else {
+						i++;
+					}
+				}
+				if (i == this.capacity()) {
+					notInsert = false;
+					throw new HashtableOverflowException();
+				}
+			}
+		}
 	}
 
 	@Override
