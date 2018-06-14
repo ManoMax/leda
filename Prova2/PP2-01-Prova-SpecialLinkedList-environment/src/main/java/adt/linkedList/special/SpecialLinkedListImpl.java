@@ -32,8 +32,40 @@ public class SpecialLinkedListImpl<T> extends SingleLinkedListImpl<T> implements
 		}
 	}
 
+	/**
+	 * elementFromTheEnd
+	 * 
+	 * 
+	 * @param int k
+	 * @return T element
+	 * @author Daniel Torres
+	 */
 	@Override
 	public T elementFromTheEnd(int k) {
+		SingleLinkedListNode<T> first = this.head;
+		SingleLinkedListNode<T> aux = this.head;
+		T element = null;
+		int count = 1;
+		while(!first.isNIL()) {
+			if(count >= k) {
+				element = aux.getData();
+				aux = aux.getNext();
+			}
+			first = first.getNext();
+			count++;
+		}
+		return element;
+}
+	
+	/**
+	 * elementFromTheEnd
+	 * 
+	 * 
+	 * @param int k
+	 * @return T element
+	 * @author Gabriel Max
+	 */
+	public T elementFromTheEnd2(int k) {
 		
 		SingleLinkedListNode<T> aux1 = head;
 		
