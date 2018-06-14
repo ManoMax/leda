@@ -17,7 +17,7 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 	@SuppressWarnings("unused")
 	@Override
 	public void insert(T element) {
-		if (element != null) {
+		if (element != null && search(element) == null) {
 			
 			int i = 0;
 			boolean notInsert = true;

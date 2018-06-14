@@ -7,3 +7,23 @@
   <level>FINE</level>
   <message>File 117110060-GABRIEL MAX VIEIRA MATOS.zip was received. It was sent by GABRIEL MAX VIEIRA MATOS from IP 150.165.42.197</message>
 </record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2018-06-14T09:11:05.736-0300</date>
+  <logger>GABRIEL MAX VIEIRA MATOS</logger>
+  <level>FINE</level>
+  <message>File 117110060-GABRIEL MAX VIEIRA MATOS.zip was received. It was sent by GABRIEL MAX VIEIRA MATOS from IP 150.165.74.133</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2018-06-14T09:18:03.043-0300</date>
+  <logger>GABRIEL MAX VIEIRA MATOS</logger>
+  <level>FINE</level>
+  <message>File 117110060-GABRIEL MAX VIEIRA MATOS.zip was received. It was sent by GABRIEL MAX VIEIRA MATOS from IP 150.165.74.133</message>
+</record>

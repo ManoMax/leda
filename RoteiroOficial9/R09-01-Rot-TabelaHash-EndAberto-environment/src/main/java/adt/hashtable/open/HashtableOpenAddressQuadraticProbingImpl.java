@@ -16,7 +16,7 @@ public class HashtableOpenAddressQuadraticProbingImpl<T extends Storable>
 
 	@Override
 	public void insert(T element) {
-		if (element != null) {
+		if (element != null && search(element) == null) {
 			
 			int i = 0;
 			boolean notInsert = true;
