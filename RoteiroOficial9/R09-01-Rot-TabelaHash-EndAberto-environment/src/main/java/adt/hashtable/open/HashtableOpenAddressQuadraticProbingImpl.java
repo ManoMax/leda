@@ -26,7 +26,7 @@ public class HashtableOpenAddressQuadraticProbingImpl<T extends Storable>
 					int hash = Math.abs(((HashFunctionOpenAddress<T>) hashFunction).hash(element, i));
 					
 					
-					if (this.table[hash] == null) {
+					if (this.table[hash] == null || this.table[hash].equals(deletedElement)) {
 						this.table[hash] = element;
 						notInsert = false;
 						this.elements++;
