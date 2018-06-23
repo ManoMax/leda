@@ -60,7 +60,7 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
    private void insert(T element, BSTNode<T> aux) {
       if (element != null) {
-         // Nó disponível
+         // Nao disponivel
          if (aux.isEmpty()) {
             aux.setData(element);
             aux.setLeft(new BSTNode<T>());
@@ -74,13 +74,13 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
             aux.getRight().setParent(aux);
             //System.out.println(element + " alocado\n");
 
-            // Nó ocupado
+            // Nao ocupado
          } else {
-            // Elemento é menor que Atual nó
+            // Elemento menor que Atual node
             if (aux.getData().compareTo(element) > 0) {
                //System.out.println(element + " esquerda");
                insert(element, (BSTNode<T>) aux.getLeft());
-               // Elemento é maior que Atual nó
+               // Elemento maior que Atual node
             } else if (aux.getData().compareTo(element) < 0) {
                //System.out.println(element + " direita");
                insert(element, (BSTNode<T>) aux.getRight());

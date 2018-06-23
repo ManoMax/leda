@@ -74,6 +74,18 @@ public class StudentBSTTest {
 		tree.insert(9);
 		assertEquals(new Integer(-34), tree.minimum().getData());
 		assertEquals(new Integer(23), tree.maximum().getData());
+		
+		tree.remove(-34);
+		assertEquals(new Integer(5), tree.minimum().getData());
+		assertEquals(new Integer(23), tree.maximum().getData());
+		
+		tree.remove(6);
+		assertEquals(new Integer(5), tree.minimum().getData());
+		assertEquals(new Integer(23), tree.maximum().getData());
+		
+		tree.remove(5);
+		assertEquals(new Integer(9), tree.minimum().getData());
+		assertEquals(new Integer(23), tree.maximum().getData());
 	}
 
 	@Test
