@@ -130,10 +130,12 @@ public class StudentBSTTest {
 		Integer[] order = { -40, -34, 0, 2, 5, 6, 9, 12, 23, 67, 76, 232 };
 		assertArrayEquals(order, tree.order());
 
+		// Duas Filhas
 		tree.remove(6);
 		order = new Integer[] { -40, -34, 0, 2, 5, 9, 12, 23, 67, 76, 232 };
 		assertArrayEquals(order, tree.order());
 
+		// Duas Filhas
 		tree.remove(9);
 		order = new Integer[] { -40, -34, 0, 2, 5, 12, 23, 67, 76, 232 };
 		assertArrayEquals(order, tree.order());
@@ -141,6 +143,19 @@ public class StudentBSTTest {
 		assertEquals(NIL, tree.search(6));
 		assertEquals(NIL, tree.search(9));
 
+		// Uma filha
+		tree.remove(2);
+		order = new Integer[] { -40, -34, 0, 5, 12, 23, 67, 76, 232 };
+		assertArrayEquals(order, tree.order());
+
+		assertEquals(NIL, tree.search(2));
+		
+		// Nenhuma filha
+		tree.remove(0);
+		order = new Integer[] { -40, -34, 5, 12, 23, 67, 76, 232 };
+		assertArrayEquals(order, tree.order());
+
+		assertEquals(NIL, tree.search(0));
 	}
 
 	@Test
