@@ -104,6 +104,15 @@ public class StudentBSTTest {
 
 		assertEquals(new Integer(0), tree.predecessor(2).getData());
 		assertEquals(new Integer(5), tree.sucessor(2).getData());
+		
+		assertEquals(new Integer(23), tree.predecessor(67).getData());
+		assertEquals(new Integer(6), tree.sucessor(5).getData());
+		
+		assertEquals(new Integer(9), tree.predecessor(12).getData());
+		assertEquals(new Integer(23), tree.sucessor(12).getData());
+		
+		assertEquals(new Integer(6), tree.predecessor(9).getData());
+		assertEquals(new Integer(9), tree.sucessor(6).getData());
 	}
 
 	@Test
