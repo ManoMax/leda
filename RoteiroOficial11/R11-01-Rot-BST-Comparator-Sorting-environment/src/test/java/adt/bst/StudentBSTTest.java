@@ -5,12 +5,12 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import adt.bst.BSTImpl;
+import adt.bst.extended.SortComparatorBSTImpl;
 import adt.bt.BTNode;
 
 public class StudentBSTTest {
 
-	private BSTImpl<Integer> tree;
+	private BST<Integer> tree;
 	private BTNode<Integer> NIL = new BTNode<Integer>();
 
 	private void fillTree() {
@@ -22,9 +22,25 @@ public class StudentBSTTest {
 
 	@Before
 	public void setUp() {
-		tree = new BSTImpl<>();
+		tree = new SortComparatorBSTImpl<Integer>( (o1, o2) -> o1 - 02);
 	}
 
+	/**
+	 * @Before
+	public void setUp() {
+		Comparator<Integer> comparator = new Comparator<Integer>() {
+			
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				return o1 - o2;
+			}
+		};
+		
+		tree = new SortComparatorBSTImpl<Integer>(comparator);
+	}
+	 */
+	
+	
 	@Test
 	public void testInit() {
 		assertTrue(tree.isEmpty());
@@ -129,7 +145,7 @@ public class StudentBSTTest {
 
 		Integer[] order = { -40, -34, 0, 2, 5, 6, 9, 12, 23, 67, 76, 232 };
 		assertArrayEquals(order, tree.order());
-
+		
 		tree.remove(6);
 		order = new Integer[] { -40, -34, 0, 2, 5, 9, 12, 23, 67, 76, 232 };
 		assertArrayEquals(order, tree.order());
