@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -15,13 +16,14 @@ public class StudentMaxHeapTest {
 
 	Heap<Integer> heap;
 
+	@SuppressWarnings("unused")
 	@Before
 	public void setUp() {
 		// TODO Instancie seu comparator para fazer sua estrutura funcionar como
 		// uma max heap aqui. Use instanciacao anonima da interface
 		// Comparator!!!!
 		Comparator<Integer> comparator = null;
-		heap = new HeapImpl<Integer>(comparator);
+		heap = new HeapImpl<Integer>( (o1, o2) -> o1 - o2);
 	}
 
 	@Test
@@ -93,7 +95,7 @@ public class StudentMaxHeapTest {
 		boolean isHeap = true;
 
 		Comparable<Integer>[] original = heap.toArray();
-
+		
 		Arrays.sort(expected);
 		Arrays.sort(original);
 
