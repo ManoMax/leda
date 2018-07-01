@@ -75,7 +75,9 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 	public T[] toArray() {
 		ArrayList<T> resp = new ArrayList<T>();
 		for (T elem : this.heap) {
-			resp.add(elem);
+			if (elem != null) {
+				resp.add(elem);
+			}
 		}
 		return (T[])resp.toArray(new Comparable[0]);
 	}
@@ -92,7 +94,7 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 		T right = heap[right(position)];
 		
 		int largest = position;
-		System.out.println(left + " " + position + " " + size());
+		//System.out.println(left + " " + position + " " + size());
 		if (left != null && (int) left <= size() && left.compareTo(heap[position]) > 0) {
 			largest = left(position);
 		} if (right != null && (int) right <= size() && right.compareTo(heap[position]) > 0) {
