@@ -90,22 +90,38 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 	 */
 	@SuppressWarnings("unused")
 	private void heapify(int position) {
-		T left = heap[left(position)];
-		T right = heap[right(position)];
+		if (position >= 0 && position <= index) {
+			T left = heap[left(position)];
+			T right = heap[right(position)];
+			
+			// exibirHeapify(left, position, right);
+			
+			if (left(position) <= index && right(position) <= index) {
+				if (comparator.compare(left, heap[position]) > 0 || comparator.compare(right, heap[position]) > 0) {
+					
+					if (comparator.compare(right, left) > 0) {
+						Util.swap(heap, position, right(position));
+						heapify(right(position));
+						
+					} else {
+						Util.swap(heap, position, left(position));
+						heapify(left(position));
+					}
+					
+			} else if (left(position) <= index) {
+				if (comparator.compare(heap[position], left) < 0) {
+					Util.swap(heap, position, position);
+					heapify(left(position));
+					}
+				}
+			
+			}
+			
+			// exibirHeapify(left, position, right);
 		
-		int largest = position;
-		//System.out.println(left + " " + position + " " + size());
-		if (left != null && (int) left <= size() && left.compareTo(heap[position]) > 0) {
-			largest = left(position);
-		} if (right != null && (int) right <= size() && right.compareTo(heap[position]) > 0) {
-			largest = right(position);
-		}
-		if (largest != position) {
-			Util.swap(heap, largest, position);
-			heapify(largest);
 		}
 	}
-
+	
 	@Override
 	public void insert(T element) {
 		// ESSE CODIGO E PARA A HEAP CRESCER SE FOR PRECISO. NAO MODIFIQUE
@@ -114,15 +130,20 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 		}
 		// /////////////////////////////////////////////////////////////////
 		// Implemente a insercao na heap aqui.
-		this.index++;
-		int position = size();
-		
-		while(position > 0 && heap[parent(position)].compareTo(element) < 0) {
-			heap[position] = heap[parent(position)];
-			position = parent(position);
+		if (element != null) {
+			this.index++;
+			int position = index;
+
+			while(position > 0 && comparator.compare(element, heap[parent(position)]) > 0) {
+				heap[position] = heap[parent(position)];
+				position = parent(position);
+			}
+			heap[position] = element;
 		}
-		heap[position] = element;
+		
+		// visualizarArray(index);
 	}
+
 
 	@Override
 	public void buildHeap(T[] array) {
@@ -141,17 +162,27 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 		
 	}
 
+
 	@Override
 	public T extractRootElement() {
-		if (!isEmpty()) {
-			T max = heap[0];
-			heap[0] = heap[size()];
+		if (index >= 0) {
+			
+			// visualizarArray(index);
+			
+			Util.swap(heap, 0, index);
+			T max = heap[index];
+			heap[index] = null;
 			this.index--;
+			
 			heapify(0);
+			
+			// System.out.println(max);
+			// visualizarArray(index + 1);
 			return max;
 		}
 		return null;
 	}
+
 
 	@Override
 	public T rootElement() {
@@ -159,11 +190,13 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 		return null;
 	}
 
+	
 	@Override
 	public T[] heapsort(T[] array) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Not implemented yet!");
 	}
+	
 
 	@Override
 	public int size() {
@@ -176,10 +209,10 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 		return size;
 	}
 
+	
 	public Comparator<T> getComparator() {
 		return comparator;
 	}
-
 	public void setComparator(Comparator<T> comparator) {
 		this.comparator = comparator;
 	}
@@ -188,4 +221,19 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 		return heap;
 	}
 
+	// Auxiliares
+	
+	private void visualizarArray(int index) {
+		for (int i = 0 ; i <= index ; i++) {
+			System.out.println("Posicao: " + i + ": " + heap[i]);
+		}
+		System.out.println("...\n");
+	}
+	
+	private void exibirHeapify(T left, int position, T right) {
+		System.out.println("Left: " + left + " Right: " + right +
+				" Position: " + position + " Parent: " + heap[position]);
+		System.out.println("\n ");
+	}
+	
 }
