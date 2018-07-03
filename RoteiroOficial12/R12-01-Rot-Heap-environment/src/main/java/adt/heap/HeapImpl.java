@@ -177,12 +177,9 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 		return null;
 	}
 	
-	@SuppressWarnings("unchecked")
-	@Override
-	public T[] heapsort(T[] array) {
-		buildHeap(array);
-		
-		ArrayList<T> aux = new ArrayList<T>();
+	/**
+	 * public T[] heapsort(T[] array) {
+	 * ArrayList<T> aux = new ArrayList<T>();
 		while (rootElement() != null) {
 			aux.add(extractRootElement());
 		}
@@ -193,6 +190,28 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 		}
 		
 		return (T[])resp.toArray(new Comparable[0]);
+		}
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public T[] heapsort(T[] array) {
+		buildHeap(array);
+		
+		for (int i = index; i >= 0 ; i--) {
+			visualizarArray(7);
+			Util.swap(array, i, 0);
+			index--;
+			heapify(0);
+		}
+		
+		ArrayList<T> aux = new ArrayList<T>();
+		for (int i = 0; i <= array.length - 1; i++) {
+			aux.add(heap[i]);
+			heap[i] = null;
+		}
+		
+		return (T[])aux.toArray(new Comparable[0]);
+		
 	}
 	
 	@Override
