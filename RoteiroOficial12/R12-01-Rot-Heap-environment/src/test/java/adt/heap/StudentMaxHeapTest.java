@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -83,7 +82,7 @@ public class StudentMaxHeapTest {
 	@Test
 	public void testSort() {
 		assertArrayEquals(new Integer[] { 5, 6, 12, 20, 34, 43, 49, 92 },
-				heap.heapsort(new Integer[] { 34, 92, 5, 12, 49, 20, 43, 6 }));
+					heap.heapsort(new Integer[] { 34, 92, 5, 12, 49, 20, 43, 6 }));
 
 		assertEquals(0, heap.size());
 		assertTrue(heap.isEmpty());
