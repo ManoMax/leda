@@ -19,8 +19,19 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements
 
 	// AUXILIARY
 	protected int calculateBalance(BSTNode<T> node) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (node != null) {
+			
+		}
+		
+		return 0;
+	}
+	
+	private int height(BSTNode<T> node) {
+		if (node != null) {
+			return (1 + calculateBalance((BSTNode<T>) node.getLeft()) + calculateBalance((BSTNode<T>) node.getRight()));
+		} else {
+			return 0;
+		}
 	}
 
 	// AUXILIARY
