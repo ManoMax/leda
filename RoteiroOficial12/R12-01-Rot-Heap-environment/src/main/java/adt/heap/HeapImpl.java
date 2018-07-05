@@ -198,7 +198,10 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 		buildHeap(array);
 		
 		for (int i = index; i >= 0 ; i--) {
-			visualizarArray(7);
+			
+			// visualizarArray(7);
+			System.out.println(Arrays.toString(array));
+			
 			Util.swap(array, i, 0);
 			index--;
 			heapify(0);
