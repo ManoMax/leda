@@ -40,7 +40,6 @@ public class StudentBSTTest {
 	}
 	 */
 	
-	
 	@Test
 	public void testInit() {
 		assertTrue(tree.isEmpty());

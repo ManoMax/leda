@@ -1,5 +1,7 @@
 package adt.bst;
 
+import java.util.Arrays;
+
 public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
    protected BSTNode<T> root;
@@ -39,6 +41,8 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
    private BSTNode<T> search(T element, BSTNode<T> node) {
       BSTNode<T> result = new BSTNode<>();
+      
+      System.out.println(Arrays.toString(order()));
       
       if (element != null && !node.isEmpty()) {
          if (node.getData().equals(element)) {

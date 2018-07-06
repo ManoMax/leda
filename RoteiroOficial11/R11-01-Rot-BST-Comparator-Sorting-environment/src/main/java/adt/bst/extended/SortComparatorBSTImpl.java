@@ -25,6 +25,10 @@ public class SortComparatorBSTImpl<T extends Comparable<T>> extends BSTImpl<T> i
 
 	@Override
 	public T[] sort(T[] array) {
+		while(!isEmpty()) {
+			remove(getRoot().getData());
+		}
+		
 		for (int i = 0; i < array.length; i++) {
 			this.insert(array[i], this.getRoot());
 		}
@@ -40,9 +44,10 @@ public class SortComparatorBSTImpl<T extends Comparable<T>> extends BSTImpl<T> i
 				node.setData(element);
 				node.setLeft(new BSTNode.Builder<T>().parent(node).build());
 				node.setRight(new BSTNode.Builder<T>().parent(node).build());
-
+				
 				if (node.getParent() == null) {
 					node.setParent(new BSTNode<>());
+					System.out.println("HEY");
 				}
 				//System.out.println(element + " alocado\n");
 
@@ -62,6 +67,32 @@ public class SortComparatorBSTImpl<T extends Comparable<T>> extends BSTImpl<T> i
 		}
 	}
 
+	@Override
+	public BSTNode<T> search(T element) {
+		BSTNode<T> aux = root;
+		return search(element, aux);
+	}
+
+	private BSTNode<T> search(T element, BSTNode<T> node) {
+		BSTNode<T> result = new BSTNode<>();
+	
+		if (element != null && !node.isEmpty()) {
+			
+			if (node.getData().equals(element)) {
+				result = node;
+			// this.comparator.compare(node.getData(), element
+			} else if (node.getData().compareTo(element) < 0) {
+				// System.out.println(node.getData() + " Menor que " + element);
+				result = search(element, (BSTNode<T>) node.getRight());
+	
+			} else {
+				// System.out.println(node.getData() + " Maior que " + element);
+				result = search(element, (BSTNode<T>) node.getLeft());
+			}
+		}
+		return result;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public T[] reverseOrder() {
@@ -72,13 +103,13 @@ public class SortComparatorBSTImpl<T extends Comparable<T>> extends BSTImpl<T> i
 	}
 
 	private int reverseOrder(T[] array, BSTNode<T> node, int index) {
-		if (!node.getRight().isEmpty()) {
+		if (!node.getRight().isEmpty() && node.getRight() instanceof BSTNode) {
 			index = reverseOrder(array, (BSTNode<T>) node.getRight(), index);
 		}
 		
 		array[index++] = node.getData();
 		
-		if (!node.getLeft().isEmpty()) {
+		if (!node.getLeft().isEmpty() && node.getLeft() instanceof BSTNode) {
 			index = reverseOrder(array, (BSTNode<T>) node.getLeft(), index);
 		}
 		
