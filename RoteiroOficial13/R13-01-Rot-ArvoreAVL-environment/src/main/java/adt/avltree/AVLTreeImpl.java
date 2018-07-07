@@ -2,6 +2,7 @@ package adt.avltree;
 
 import adt.bst.BSTImpl;
 import adt.bst.BSTNode;
+import adt.bt.Util;
 
 /**
  * 
@@ -17,27 +18,93 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements
 	// TODO Do not forget: you must override the methods insert and remove
 	// conveniently.
 
-	// AUXILIARY
-	protected int calculateBalance(BSTNode<T> node) {
-		if (node != null) {
-			
+	@Override
+	public void insert(T element) {
+		if (element != null) {
+			insertRecursive(element, root);
+			System.out.println("\n");
 		}
-		
-		return 0;
 	}
 	
-	private int height(BSTNode<T> node) {
-		if (node != null) {
-			return (1 + calculateBalance((BSTNode<T>) node.getLeft()) + calculateBalance((BSTNode<T>) node.getRight()));
+	@SuppressWarnings("unchecked")
+	private void insertRecursive(T element, BSTNode<T> node) {
+		if (node.isEmpty()) {
+			node.setData(element);
+			node.setLeft(new BSTNode.Builder<T>().parent(node).build());
+            node.setRight(new BSTNode.Builder<T>().parent(node).build());
+            
+            if (node.getParent() == null) {
+				this.root = node;
+			}
+            System.out.println(element + " alocado.");
 		} else {
-			return 0;
+			if (node.getData().compareTo(element) > 0) {
+				System.out.println(element + " esquerda");
+				insertRecursive(element, (BSTNode<T>) node.getLeft());
+			} else if (node.getData().compareTo(element) < 0) {
+				System.out.println(element + " direita");
+				insertRecursive(element, (BSTNode<T>) node.getRight());
+			}
+			// Node acima do Elemento alocado
+			System.out.println("rebalance com " + node.getData());
+			rebalance(node);
 		}
 	}
 
 	// AUXILIARY
+	protected int calculateBalance(BSTNode<T> node) {
+		if (node != null) {
+			return height((BSTNode<T>) node.getLeft()) - height((BSTNode<T>) node.getRight());
+		}
+		
+		return 0;
+	}
+
+	// AUXILIARY
 	protected void rebalance(BSTNode<T> node) {
+		int balance = calculateBalance(node);
+		
+		printDesseNode(node);
+		
+		if (balance > 1) {
+			System.out.println("Esquerda > Direita\n");
+			if (calculateBalance((BSTNode<T>) node.getLeft()) >= 0) {
+				
+			}
+			rebalanceLeft(node);
+		}
+		
+		if (balance < -1) {
+			System.out.println("Direita > Esquerda\n");
+			rebalanceRight(node);
+		}
+	}
+
+	private void printDesseNode(BSTNode<T> node) {
+		System.out.println("Node: " + node.getData() +
+				   ", Left: " + node.getLeft().getData()
+				   + ", Right: " + node.getRight().getData()
+				   + ", Balance: " + (height((BSTNode<T>) node.getLeft()) - height((BSTNode<T>) node.getRight())));
+	}
+
+	private void rebalanceRight(BSTNode<T> node) {
+		int balanceRight = calculateBalance(node);
+		
+		if (balanceRight > 0) {
+			Util.leftRotation(node);
+		}
+		
+	}
+
+	private void rebalanceLeft(BSTNode<T> node) {
+		int balanceLeft = calculateBalance(node);
+		
+		if (balanceLeft > 0) {
+			Util.rightRotation(node);
+		}
+		
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		
 	}
 
 	// AUXILIARY

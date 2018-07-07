@@ -11,18 +11,32 @@ public class Util {
 	 * @return
 	 */
 	public static <T extends Comparable<T>> BSTNode<T> leftRotation(BSTNode<T> node) {
-		//TODO Implemente sua rotacao a esquerda aqui
-		throw new UnsupportedOperationException("Not implemented yet!");
+		
+		BSTNode<T> pivot = (BSTNode<T>) node.getRight(); // 30
+		BSTNode<T> root = (BSTNode<T>) node.getParent();
+		
+		
+		pivot.setLeft(node); // 20 < 30
+		
+		node.getParent().setRight(pivot); 
+		
+		return (BSTNode<T>) node.getRight();
 	}
-
+	
 	/**
 	 * A rotacao a direita em node deve subir e retornar seu filho a esquerda
 	 * @param node
 	 * @return
 	 */
 	public static <T extends Comparable<T>> BSTNode<T> rightRotation(BSTNode<T> node) {
-		//TODO Implemente sua rotacao a esquerda aqui
-		throw new UnsupportedOperationException("Not implemented yet!");
+	
+		BSTNode<T> pivot = (BSTNode<T>) node; // -10
+		BSTNode<T> root = (BSTNode<T>) node.getRight(); // 20
+		
+		
+		
+		
+		return null;
 	}
 
 	public static <T extends Comparable<T>> T[] makeArrayOfComparable(int size) {
