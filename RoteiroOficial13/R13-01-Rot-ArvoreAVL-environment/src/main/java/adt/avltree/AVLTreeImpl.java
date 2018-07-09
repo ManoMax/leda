@@ -88,11 +88,14 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements
 	}
 
 	private void rebalanceRight(BSTNode<T> node) {
-		int balanceRight = calculateBalance(node);
+		int balanceRight = calculateBalance((BSTNode<T>) node.getRight());
 		
 		if (balanceRight > 0) {
-			Util.leftRotation(node);
+			System.out.println("Dupla");
+			Util.rightRotation((BSTNode<T>) node.getRight());
 		}
+		System.out.println("Simples");
+		Util.leftRotation(node);
 		
 	}
 

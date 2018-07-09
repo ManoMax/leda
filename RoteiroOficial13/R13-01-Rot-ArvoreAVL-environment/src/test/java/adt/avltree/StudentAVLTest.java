@@ -41,7 +41,7 @@ public class StudentAVLTest {
 		avl.insert(30);
 		assertEquals(3, avl.size());
 		assertEquals(1, avl.height());
-		assertArrayEquals(new Integer[] { -10, 20, 30 }, avl.preOrder());
+		assertArrayEquals(new Integer[] { 20, -10, 30 }, avl.preOrder());
 	}
 	
 	@Test
