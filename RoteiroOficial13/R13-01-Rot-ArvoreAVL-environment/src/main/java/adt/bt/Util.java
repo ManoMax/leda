@@ -51,23 +51,24 @@ public class Util {
 	public static <T extends Comparable<T>> BSTNode<T> rightRotation(BSTNode<T> node) {
 	
 		BSTNode<T> pivot = (BSTNode<T>) node.getLeft(); // 20
-		BSTNode<T> oposit = (BSTNode<T>) node.getRight(); // null T1
-		BSTNode<T> left = (BSTNode<T>) pivot.getRight(); // null T2
-		BSTNode<T> right = (BSTNode<T>) pivot.getLeft(); // 30 T3
+		BSTNode<T> t1 = (BSTNode<T>) node.getRight(); // null T1
+		BSTNode<T> t2 = (BSTNode<T>) pivot.getRight(); // null T2
+		BSTNode<T> t3 = (BSTNode<T>) pivot.getLeft(); // 30 T3
 		
 		swap(pivot, node);
-		
-		node.setLeft(right);
-		right.setParent(node);
 		
 		node.setRight(pivot);
 		pivot.setParent(node);
 		
-		pivot.setRight(oposit);
-		pivot.setLeft(left);
-		oposit.setParent(pivot);
-		left.setParent(pivot);
+		node.setLeft(t3);
+		t3.setParent(node);
 		
+		pivot.setRight(t1);
+		t1.setParent(pivot);
+		
+		node.setLeft(t2);
+		t2.setParent(node);
+		System.out.println(pivot + " " + t1 + t2 + t3);
 		return node;
 	}
 

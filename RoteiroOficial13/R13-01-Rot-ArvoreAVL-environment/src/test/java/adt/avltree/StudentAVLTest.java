@@ -28,20 +28,21 @@ public class StudentAVLTest {
 	@Test
 	public void testInset1() {
 		
-		avl.insert(-10);
+		avl.insert(30);
 		assertEquals(1, avl.size());
 		assertEquals(0, avl.height());
-		assertArrayEquals(new Integer[] { -10 }, avl.preOrder());
+		assertArrayEquals(new Integer[] { 30}, avl.preOrder());
 		
 		avl.insert(20);
 		assertEquals(2, avl.size());
 		assertEquals(1, avl.height());
-		assertArrayEquals(new Integer[] { -10, 20 }, avl.preOrder());
+		assertArrayEquals(new Integer[] { 30, 20 }, avl.preOrder());
 		
-		avl.insert(30);
+		avl.insert(-10);
 		assertEquals(3, avl.size());
 		assertEquals(1, avl.height());
-		assertArrayEquals(new Integer[] { 20, -10, 30 }, avl.preOrder());
+		assertArrayEquals(new Integer[] { 30, 20, -10}, avl.preOrder());
+		
 	}
 	
 	@Test
