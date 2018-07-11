@@ -26,26 +26,6 @@ public class StudentAVLTest {
 	}
 
 	@Test
-	public void testInset1() {
-		
-		avl.insert(30);
-		assertEquals(1, avl.size());
-		assertEquals(0, avl.height());
-		assertArrayEquals(new Integer[] { 30}, avl.preOrder());
-		
-		avl.insert(20);
-		assertEquals(2, avl.size());
-		assertEquals(1, avl.height());
-		assertArrayEquals(new Integer[] { 30, 20 }, avl.preOrder());
-		
-		avl.insert(-10);
-		assertEquals(3, avl.size());
-		assertEquals(1, avl.height());
-		assertArrayEquals(new Integer[] { 30, 20, -10}, avl.preOrder());
-		
-	}
-	
-	@Test
 	public void testInsert() {
 		avl.insert(-10);
 		assertEquals(1, avl.size());
@@ -64,17 +44,6 @@ public class StudentAVLTest {
 		assertEquals(3, avl.size());
 		assertEquals(1, avl.height());
 		assertArrayEquals(new Integer[] { -10, -15, 20 }, avl.preOrder());
-		
-		avl.insert(30);
-		assertEquals(4, avl.size());
-		assertEquals(2, avl.height());
-		assertArrayEquals(new Integer[] { -10, -15, 20, 30 }, avl.preOrder());
-		
-		avl.insert(40);
-		assertEquals(5, avl.size());
-		assertEquals(2, avl.height());
-		assertArrayEquals(new Integer[] { -10, -15, 20, 30, 40 }, avl.preOrder());
-		
 	}
 
 	@Test
@@ -90,6 +59,7 @@ public class StudentAVLTest {
 		avl.remove(91);
 		assertEquals(3, avl.size());
 		assertArrayEquals(new Integer[] { 12, 9, 55 }, avl.preOrder());
+		
 
 		avl.remove(12);
 		assertEquals(2, avl.size());

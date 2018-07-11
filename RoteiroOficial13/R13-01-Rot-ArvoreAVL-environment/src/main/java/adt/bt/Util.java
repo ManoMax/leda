@@ -11,37 +11,28 @@ public class Util {
 	 * @return
 	 */
 	public static <T extends Comparable<T>> BSTNode<T> leftRotation(BSTNode<T> node) {
+		BSTNode<T> rightNode = (BSTNode<T>) node.getRight();
+		rightNode.setParent(node.getParent());
 		
-		BSTNode<T> pivot = (BSTNode<T>) node.getRight(); // 20
-		BSTNode<T> oposit = (BSTNode<T>) node.getLeft(); // null T1
-		BSTNode<T> left = (BSTNode<T>) pivot.getLeft(); // null T2
-		BSTNode<T> right = (BSTNode<T>) pivot.getRight(); // 30 T3
+		if (node.getParent() != null) {
+			if (node.getParent().getLeft().equals(node)) {
+				node.getParent().setLeft(rightNode);
+			} else {
+				node.getParent().setRight(rightNode);
+			}
+		}
 		
-		swap(pivot, node);
+		node.setParent(rightNode);
+		node.setRight(rightNode.getLeft());
 		
-		node.setRight(right);
-		right.setParent(node);
+		if (rightNode.getLeft() != null) {
+			rightNode.getLeft().setParent(node);
+		}
 		
-		node.setLeft(pivot);
-		pivot.setParent(node);
+		rightNode.setLeft(node);
 		
-		pivot.setLeft(oposit);
-		pivot.setRight(left);
-		oposit.setParent(pivot);
-		left.setParent(pivot);
-		
-		return node;
+		return rightNode;
 	}
-	
-	private static <T extends Comparable<T>> BSTNode<T> swap(BSTNode<T> pivot, BSTNode<T> node) {
-		
-		T aux = node.getData();
-		node.setData(pivot.getData());
-		pivot.setData(aux);
-		
-		return null;
-	}
-	
 
 	/**
 	 * A rotacao a direita em node deve subir e retornar seu filho a esquerda
@@ -49,27 +40,27 @@ public class Util {
 	 * @return
 	 */
 	public static <T extends Comparable<T>> BSTNode<T> rightRotation(BSTNode<T> node) {
-	
-		BSTNode<T> pivot = (BSTNode<T>) node.getLeft(); // 20
-		BSTNode<T> t1 = (BSTNode<T>) node.getRight(); // null T1
-		BSTNode<T> t2 = (BSTNode<T>) pivot.getRight(); // null T2
-		BSTNode<T> t3 = (BSTNode<T>) pivot.getLeft(); // 30 T3
+		BSTNode<T> leftNode = (BSTNode<T>) node.getLeft();
+		leftNode.setParent(node.getParent());
 		
-		swap(pivot, node);
+		if (node.getParent() != null) {
+			if (node.getParent().getLeft().equals(node)) {
+				node.getParent().setLeft(leftNode);
+			} else {
+				node.getParent().setRight(leftNode);
+			}
+		}
 		
-		node.setRight(pivot);
-		pivot.setParent(node);
+		node.setParent(leftNode);
+		node.setLeft(leftNode.getRight());
 		
-		node.setLeft(t3);
-		t3.setParent(node);
+		if (leftNode.getRight() != null) {
+			leftNode.getRight().setParent(node);
+		}
 		
-		pivot.setRight(t1);
-		t1.setParent(pivot);
+		leftNode.setRight(node);
 		
-		node.setLeft(t2);
-		t2.setParent(node);
-		System.out.println(pivot + " " + t1 + t2 + t3);
-		return node;
+		return leftNode;
 	}
 
 	public static <T extends Comparable<T>> T[] makeArrayOfComparable(int size) {
