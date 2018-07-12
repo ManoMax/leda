@@ -3,9 +3,9 @@ package adt.skipList;
 public class SkipListNode<T> {
 
 	// a chave do root eh Integer.MIN_VALUE e a do NIL eh Integer.MAX_VALUE
-	protected int key;
+	protected int key; // Altura (nivel) - Iniciado em 1
 	protected T value;
-	protected SkipListNode<T>[] forward;
+	protected SkipListNode<T>[] forward; // Array com Elementos da altura [key]
 
 	@SuppressWarnings("unchecked")
 	public SkipListNode(int key, int height, T satelliteData) {

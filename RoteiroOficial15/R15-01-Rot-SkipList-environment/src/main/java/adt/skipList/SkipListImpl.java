@@ -31,6 +31,23 @@ public class SkipListImpl<T> implements SkipList<T> {
 	
 	@Override
 	public void insert(int key, T newValue, int height) {
+		
+		SkipListNode<T> node1 = root;
+		SkipListNode<T> node2 = NIL;
+		
+		for (int i = maxHeight; i >= 0; i--) {
+			while (node1.getForward(i) != NIL && node1.getForward(i).getKey() < key) {
+				node1 = node1.getForward(i);
+			}
+			node2 = node1;
+		}
+		
+		node1 = node1.getForward(0);
+		
+		if (node1 != null || node1.getKey() != key) {
+			
+			
+		}
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Not implemented yet!");
 	}
@@ -49,8 +66,19 @@ public class SkipListImpl<T> implements SkipList<T> {
 
 	@Override
 	public SkipListNode<T> search(int key) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		
+		SkipListNode<T> node1 = root;
+		SkipListNode<T> node2 = root;
+		for (int i = maxHeight; i >= 0; i--) {
+			while (node2.getKey() < key || node2 != NIL) {
+				node2.getForward(i);
+			}
+		}
+		
+		if (node2.getKey() == key) {
+			return node2;
+		} else
+			return NIL;
 	}
 
 	@Override
