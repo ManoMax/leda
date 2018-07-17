@@ -1,6 +1,7 @@
 package adt.rbtree;
 
 import adt.bst.BSTImpl;
+import adt.bt.Util;
 import adt.rbtree.RBNode.Colour;
 
 public class RBTreeImpl<T extends Comparable<T>> extends BSTImpl<T>
@@ -112,12 +113,35 @@ public class RBTreeImpl<T extends Comparable<T>> extends BSTImpl<T>
 	}
 
 	protected void fixUpCase4(RBNode<T> node) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		
+		RBNode<T> next = node;
+		RBNode<T> pai = (RBNode<T>) node.getParent();
+		RBNode<T> avo = (RBNode<T>) pai.getParent();
+		
+		if (next == pai.getRight() && pai == avo.getLeft()) {
+			Util.leftRotation(pai);
+			next = (RBNode<T>) node.getLeft();
+		}
+		else if (next == pai.getLeft() && pai == avo.getRight())  {
+			Util.rightRotation(pai);
+			next = (RBNode<T>) node.getRight();
+		}
+		fixUpCase5(next);
+		
 	}
 
 	protected void fixUpCase5(RBNode<T> node) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		
+		RBNode<T> pai = (RBNode<T>) node.getParent();
+		RBNode<T> avo = (RBNode<T>) pai.getParent();
+		
+		pai.setColour(Colour.BLACK);
+		avo.setColour(Colour.RED);
+		
+		if (node == pai.getLeft()) {
+			Util.rightRotation(avo);
+		} else {
+			Util.leftRotation(avo);
+		}
 	}
 }
