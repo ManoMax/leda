@@ -1,7 +1,5 @@
 package adt.bst;
 
-import java.util.Arrays;
-
 public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
    protected BSTNode<T> root;
@@ -41,16 +39,16 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
    private BSTNode<T> search(T element, BSTNode<T> node) {
       BSTNode<T> result = new BSTNode<>();
-      
+
       // System.out.println(Arrays.toString(order()));
-      
+
       if (element != null && !node.isEmpty()) {
          if (node.getData().equals(element)) {
             result = node;
-            
+
          } else if (node.getData().compareTo(element) < 0) {
             result = search(element, (BSTNode<T>) node.getRight());
-            
+
          } else {
             result = search(element, (BSTNode<T>) node.getLeft());
          }
@@ -80,14 +78,14 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
             }
             //System.out.println(element + " alocado\n");
 
-         // Nao Disponivel
+            // Nao Disponivel
          } else {
             // Elemento menor que Atual node
             if (node.getData().compareTo(element) > 0) {
                //System.out.println(element + " esquerda");
                insert(element, (BSTNode<T>) node.getLeft());
-               
-            // Elemento maior que Atual node
+
+               // Elemento maior que Atual node
             } else if (node.getData().compareTo(element) < 0) {
                //System.out.println(element + " direita");
                insert(element, (BSTNode<T>) node.getRight());
@@ -132,26 +130,26 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
    @Override
    public BSTNode<T> sucessor(T element) {
-	  //System.out.println("Sucessor de " + element);
+      //System.out.println("Sucessor de " + element);
       BSTNode<T> node = search(element);
 
       if (node.isEmpty())
          return null;
 
       if (!node.getRight().isEmpty()) {
-    	 //System.out.println("� " + minimum((BSTNode<T>) node.getRight())+"\n");
+         //System.out.println("ï¿½ " + minimum((BSTNode<T>) node.getRight())+"\n");
          return minimum((BSTNode<T>) node.getRight());
       } else {
          BSTNode<T> parent = (BSTNode<T>) node.getParent();
 
          while (!parent.isEmpty() && node.equals(parent.getRight())) {
-        	//System.out.println(node.getData() + " " + parent.getData());
+            //System.out.println(node.getData() + " " + parent.getData());
             node = parent;
             parent = (BSTNode<T>) node.getParent();
          }
          if (parent.isEmpty())
             return null;
-         //System.out.println("� " + parent);
+         //System.out.println("ï¿½ " + parent);
          return parent;
       }
    }
@@ -182,7 +180,8 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
    public void remove(T element) {
       if (element != null) {
          BSTNode<T> node = search(element);
-         if (node.isEmpty()) return;
+         if (node.isEmpty())
+            return;
          remove(node);
       }
    }
@@ -197,8 +196,8 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
          BSTNode<T> sucessor = sucessor(node.getData());
          node.setData(sucessor.getData());
          remove(sucessor);
-         
-      // Uma filha ou Nem uma filha
+
+         // Uma filha ou Nem uma filha
       } else {
          BSTNode<T> son = (BSTNode<T>) node.getLeft();
 
@@ -242,7 +241,8 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
    @Override
    public T[] order() {
       T[] array = (T[]) new Comparable[this.size()];
-      if (this.isEmpty()) return array;
+      if (this.isEmpty())
+         return array;
       order(array, root, 0);
       return array;
    }
