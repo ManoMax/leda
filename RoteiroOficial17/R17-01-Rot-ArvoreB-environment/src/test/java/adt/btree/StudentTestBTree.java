@@ -47,8 +47,19 @@ public class StudentTestBTree {
 	@Test
 	public void testSize() {
 		assertEquals(0, tree1.size());
+		
 		tree1.insert(18);
 		assertEquals(1, tree1.size());
+		
+		tree1.insert(9);
+		assertEquals(2, tree1.size());
+		
+		tree1.insert(20);
+		assertEquals(3, tree1.size());
+		
+		tree1.insert(25);
+		assertEquals(4, tree1.size());
+		
 	}
 
 }

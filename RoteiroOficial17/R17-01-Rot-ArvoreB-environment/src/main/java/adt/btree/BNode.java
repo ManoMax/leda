@@ -122,5 +122,21 @@ public class BNode<T extends Comparable<T>> {
 		this.order = order;
 	}
 
+	public BNode<T> copyLeftChildren(int median) {
+		BNode<T> node = new BNode<T>(order);
+		
+		for (int i = 0; i < median; i++) {
+			node.addElement(elements.get(i));
+		}
+		return node;
+	}
 	
+	public BNode<T> copyRightChildren(int median) {
+		BNode<T> node = new BNode<T>(order);
+		
+		for (int i = median +1; i < getOrder(); i++) {
+			node.addElement(elements.get(i));
+		}
+		return node;
+	}
 }

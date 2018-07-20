@@ -1,5 +1,7 @@
 package adt.btree;
 
+import javax.lang.model.util.Elements;
+
 public class BTreeImpl<T extends Comparable<T>> implements BTree<T> {
 
 	protected BNode<T> root;
@@ -114,19 +116,72 @@ public class BTreeImpl<T extends Comparable<T>> implements BTree<T> {
 
 	@Override
 	public void insert(T element) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not Implemented yet!");
+		
+		insert(element, getRoot());
 
+	}
+
+	private void insert(T element, BNode<T> node) {
+		
+		if (!node.isLeaf()) {
+			int i = 0;
+			while (i < node.size() && node.getElementAt(i).compareTo(element) < 0) i++;
+			
+			insert(element, node.getChildren().get(i));
+		} else {
+			
+			if (!node.isFull()) {
+				node.addElement(element);
+			} else {
+
+				node.addElement(element);
+				split(node);
+				
+			}
+			
+		}
+		
 	}
 
 	private void split(BNode<T> node) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not Implemented yet!");
+		
+		int median = node.size()/2;
+		T mid = node.getElementAt(median);
+		
+		BNode<T> left = node.copyLeftChildren(median);
+		BNode<T> right = node.copyRightChildren(median);
+		
+		if (node.getParent() == null) {
+			node.setParent(new BNode<T>(node.getOrder()));
+			//node.getParent().getChildren().addFirst(node);
+			node.getParent().addChild(0, node);
+		}
+		
+		BNode<T> parent = node.getParent();
+		System.out.println(parent.getChildren());
+		System.out.println("NODE = " + node);
+		System.out.println("LEFT: " + left);
+		System.out.println("RIGHT: " + right);
+		System.out.println("Parent: " + parent);
+		
+		int index = parent.indexOfChild(node);
+		
+		parent.removeChild(node);
+		
+		parent.addChild(index, left);
+		parent.addChild(index+1, right);
+		
+		left.setParent(parent);
+		right.setParent(parent);
+		
+		this.promote(parent);
+		
 	}
 
 	private void promote(BNode<T> node) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not Implemented yet!");
+		if (!node.isFull()) {
+			split(node);
+		}
 	}
 
 	// NAO PRECISA IMPLEMENTAR OS METODOS ABAIXO
