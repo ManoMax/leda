@@ -13,24 +13,39 @@ import util.Util;
  * is completely ordered.
  */
 public class SimultaneousBubblesort<T extends Comparable<T>> extends AbstractSorting<T> {
-   public void sort(T[] array, int leftIndex, int rightIndex) {
 
-	   for (int i = leftIndex; i < rightIndex; i++) {
-		   for(int j = leftIndex; j < rightIndex-i; j++) {
-			   if (array[j].compareTo(array[j+1]) > 0) Util.swap(array, j, j+1);
-			   if (array[rightIndex-j].compareTo(array[rightIndex-j-1]) < 0) Util.swap(array, rightIndex-j, rightIndex-j-1);
-		   }
-	   }
-   }
-   
-   private String exibirArray(T[] array) {
-		String saida = "";
-		
-		for (int i = 0; i < array.length; i ++) {
-			saida += array[i] + " ";
+	public void sort(T[] array, int leftIndex, int rightIndex) {
+
+		if (isValid(array, leftIndex, rightIndex)) {
+
+			boolean swapped = true;
+			while (leftIndex <= rightIndex && swapped) {
+
+				swapped = false;
+				int i = leftIndex, j = rightIndex;
+				while (i < rightIndex && j > leftIndex) {
+					
+					if (array[i].compareTo(array[i+1]) > 0) 
+						Util.swap(array, i, i+1); swapped = true;
+					if (array[j].compareTo(array[j-1]) < 0) 
+						Util.swap(array, j, j-1); swapped = true;
+					i++; j--;
+					
+				}
+				leftIndex++; rightIndex--;
+			}
+			
 		}
-		return saida + "\n";
+	}
+   
+   private boolean isValid(T[] array, int leftIndex, int rightIndex) {
+		boolean isValid = true;
 		
+		if (leftIndex >= rightIndex) isValid = false;
+		if (leftIndex < 0 || rightIndex > array.length) isValid = false;
+		if (array == null || array.length <= 1) isValid = false;
+		
+		return isValid;
 	}
    
 }

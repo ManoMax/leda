@@ -13,34 +13,34 @@ public class SelectionSort<T extends Comparable<T>> extends AbstractSorting<T> {
 	@Override
 	public void sort(T[] array, int leftIndex, int rightIndex) {
 		
-		for(int i = leftIndex; i < rightIndex; i++) {
+		if (isValid(array, leftIndex, rightIndex)) {
 			
-			T min = array[i];
-			int key = i;
-			
-			for (int j = i+1; j <= rightIndex; j++) {
-				if (min.compareTo(array[j]) >= 0) {					
-					min = array[j];
-					key = j;
-				}
-				
+			int indexMin;
+			for(int i = leftIndex; i <= rightIndex; i++) {
+				indexMin = searchMinElement(array, i, rightIndex);
+				Util.swap(array, i, indexMin);
 			}
-			Util.swap(array, key, i);
-			
 			
 		}
-		
-		// TODO Auto-generated method stub
-		//throw new UnsupportedOperationException("Not Implemented yet!");
 	}
 	
-	private String exibirArray(T[] array) {
-		String saida = "";
+	private int searchMinElement(T[] array, int leftIndex, int rightIndex) {
+		int indexMin = leftIndex;
 		
-		for (int i = 0; i < array.length; i ++) {
-			saida += array[i] + " ";
-		}
-		return saida + "\n";
+		for (int i = leftIndex; i < rightIndex; i++)
+			if (array[i].compareTo(array[indexMin]) < 0)
+				indexMin = i;
 		
+		return indexMin;
+	}
+
+	private boolean isValid(T[] array, int leftIndex, int rightIndex) {
+		boolean isValid = true;
+		
+		if (leftIndex >= rightIndex) isValid = false;
+		if (leftIndex < 0 || rightIndex > array.length) isValid = false;
+		if (array == null || array.length <= 1) isValid = false;
+		
+		return isValid;
 	}
 }

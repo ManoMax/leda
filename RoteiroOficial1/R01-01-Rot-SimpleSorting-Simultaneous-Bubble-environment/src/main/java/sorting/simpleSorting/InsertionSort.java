@@ -1,7 +1,6 @@
 package sorting.simpleSorting;
 
 import sorting.AbstractSorting;
-import util.Util;
 
 /**
  * As the insertion sort algorithm iterates over the array, it makes the
@@ -14,43 +13,33 @@ public class InsertionSort<T extends Comparable<T>> extends AbstractSorting<T> {
 	@Override
 	public void sort(T[] array, int leftIndex, int rightIndex) {
 		
-		for(int i = leftIndex; i < rightIndex; i++) {
-			//System.out.println(this.exibirArray(array));
-			//System.out.println(i + "L: " + leftIndex + " R: " + rightIndex);
+		if (isValid(array, leftIndex, rightIndex)) {
+			int index;
+			T key;
 			
-			int j = i;
-			int key = i+1;
-			
-			//System.out.println("J: " + j + " Key: " + key);
-			//System.out.println(j >= 0 && array[key].compareTo(o) < 0);
-			
-			while (j >= 0 && array[key].compareTo(array[j]) < 0) {
-				//System.out.println(this.exibirArray(array));
-				//System.out.println("Mudou " + j + " " + key);
+			for(int i = leftIndex; i < rightIndex; i++) {
 				
-				Util.swap(array, key, j);
-				j--;
-				if (j >= 0) {
-					key = j+1;
-					//System.out.println("J: " + j + " Key: " + key);
+				key = array[i+1];
+				index = i;
+				
+				while (index >= leftIndex && array[index].compareTo(key) > 0) {
+					array[index + 1] = array[index];
+					index--;
 				}
-				
+				array[index + 1] = key;
 			}
 		}
 		
-			}
+	}
 	
-	private String exibirArray(T[] array) {
-		String saida = "";
+	private boolean isValid(T[] array, int leftIndex, int rightIndex) {
+		boolean isValid = true;
 		
-		for (int i = 0; i < array.length; i ++) {
-			saida += array[i] + " ";
-		}
-		return saida + "\n";
+		if (leftIndex >= rightIndex) isValid = false;
+		if (leftIndex < 0 || rightIndex > array.length) isValid = false;
+		if (array == null || array.length <= 1) isValid = false;
 		
+		return isValid;
 	}
-		
-		// TODO Auto-generated method stub
-		//throw new UnsupportedOperationException("Not Implemented yet!");
-	}
+}
 
