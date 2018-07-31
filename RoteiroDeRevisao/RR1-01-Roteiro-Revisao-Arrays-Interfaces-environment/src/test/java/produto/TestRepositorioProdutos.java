@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class TestRepositorioProdutos {
 	
-	private RepositorioProdutoArrayList repositorio;
+	private RepositorioProdutoArrayList repositorio; 
 	
 	@Before
 	public void setUp() {
