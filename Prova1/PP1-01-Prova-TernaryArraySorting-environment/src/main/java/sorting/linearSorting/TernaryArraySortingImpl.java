@@ -2,6 +2,15 @@ package sorting.linearSorting;
 
 import util.Util;
 
+/**
+ * Código mais FEIO da minha vida!
+ * Por favor, olhe o exemplo de meu amigo José Amandio
+ * Esse cara é fod*, parabéns Amandinho!
+ * 
+ * @author USUARIO
+ *
+ * @param <T>
+ */
 public class TernaryArraySortingImpl<T extends Comparable<T>> implements TernaryArraySorting<T> {
 
    /**
