@@ -58,11 +58,7 @@ public class ExemplosRecursao {
 	private int minimumRecursive(int[] array, int posicao) {
 		int minimum = array[0]; //valor base a ser retornado
 		if(posicao == array.length-1){ //caso base 
-<<<<<<< HEAD
 			//nao faz nada porque minimum já guarda o valor a ser retornado
-=======
-			if (array[posicao] < minimum) minimum = array[posicao];
->>>>>>> 98e87768c1cbec382073741311da90b4af5b6aae
 		}else{
 			int proxMin = minimumRecursive(array, posicao + 1);
 			if(proxMin < minimum){
@@ -106,6 +102,7 @@ public class ExemplosRecursao {
 		}
 		return palindrome;
 	}
+
 	//verifica se uma sequencia eh um apalindrome com recursao
 	public boolean isPalindromeRecursive(String word){
 		boolean palindrome = true;
