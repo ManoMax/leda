@@ -1,7 +1,5 @@
 package adt.btree;
 
-import javax.lang.model.util.Elements;
-
 public class BTreeImpl<T extends Comparable<T>> implements BTree<T> {
 
 	protected BNode<T> root;
@@ -24,79 +22,81 @@ public class BTreeImpl<T extends Comparable<T>> implements BTree<T> {
 
 	@Override
 	public int height() {
-	int result;
-	if (getRoot().isEmpty()) {
-		result = -1;
-	} else {
-		result = height(this.root);
-	}
-	return result;
+		int result;
+		if (getRoot().isEmpty()) {
+			result = -1;
+		} else {
+			result = height(this.root);
+		}
+		return result;
 	}
 
 	private int height(BNode<T> node) {
-		int result = 0;
-		if (!node.isEmpty() && !node.isLeaf())
-			result += 1 + height(node.getChildren().getFirst());
-		return result;
+		if (node.isLeaf())
+			return 0;
+		else
+			return 1 + height(node.getChildren().getFirst());
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public BNode<T>[] depthLeftOrder() {
-		
+
 		BNode<T>[] array = new BNode[sizeOfNodes(root)];
-		
+
 		depthLeftOrder(root, array);
-		
+
 		return array;
 	}
 
 	private void depthLeftOrder(BNode<T> node, BNode<T>[] array) {
-		
 		setNewNode(node, array);
-		
+
 		for (BNode<T> nodeAux : node.getChildren()) {
 			depthLeftOrder(nodeAux, array);
 		}
 	}
-	
+
 	private void setNewNode(BNode<T> node, BNode<T>[] array) {
 		int i = 0;
-		
+
 		while (array[i] != null && i < array.length)
 			i++;
-		
+
 		array[i] = node;
 	}
 
 	private int sizeOfNodes(BNode<T> node) {
-		
-		int result = 1;
-		
-		for (BNode<T> nodeAux : node.getChildren())
-			result += sizeOfNodes(nodeAux);
-		
-		return result;
+		if (node.isEmpty()) {
+			return 0;
+		} else {
+			int result = 1;
+
+			for (BNode<T> nodeAux : node.getChildren())
+				result += sizeOfNodes(nodeAux);
+			
+			return result;
+		}
 	}
-	
+
 	@Override
 	public int size() {
 		return size(this.root);
 	}
-	
+
 	private int size(BNode<T> node) {
-		
+
 		int result = 0;
-		
+
 		result += node.getElements().size();
-		
+
 		for (BNode<T> nodeAux : node.getChildren()) {
 			result += size(nodeAux);
 		}
-		
+
 		return result;
 	}
-	
+
 	@Override
 	public BNodePosition<T> search(T element) {
 		return search(element, root);
@@ -105,56 +105,58 @@ public class BTreeImpl<T extends Comparable<T>> implements BTree<T> {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private BNodePosition<T> search(T element, BNode<T> node) {
 		int i = 0;
-		
-		while (i < node.getElements().size() && node.getElementAt(i).compareTo(element) < 0) i++;
-		
+
+		while (i < node.getElements().size() && node.getElementAt(i).compareTo(element) < 0)
+			i++;
+
 		if (i <= node.getElements().size() && node.getElementAt(i).equals(element))
 			return new BNodePosition(node, i);
-		
+
 		if (node.isLeaf())
 			return new BNodePosition(null, -1);
-		
+
 		return search(element, node.getChildren().get(i));
 	}
-	
+
 	@Override
 	public void insert(T element) {
-		
+
 		insert(element, getRoot());
 
 	}
 
 	private void insert(T element, BNode<T> node) {
-		
+
 		if (!node.isLeaf()) {
 			int i = 0;
-			while (i < node.size() && node.getElementAt(i).compareTo(element) < 0) i++;
-			
+			while (i < node.size() && node.getElementAt(i).compareTo(element) < 0)
+				i++;
+
 			insert(element, node.getChildren().get(i));
 		} else {
 			node.addElement(element);
 		}
-		
+
 		if (node.getMaxKeys() < node.size()) {
 			split(node);
 		}
-		
+
 	}
 
 	private void split(BNode<T> node) {
-		
-		int median = node.size()/2;
+
+		int median = node.size() / 2;
 		T mid = node.getElementAt(median);
-		
+
 		BNode<T> left = node.copyLeftChildren(median);
 		BNode<T> right = node.copyRightChildren(median);
-		
+
 		if (node == root) {
 			BNode<T> newRoot = new BNode<T>(node.getOrder());
 			newRoot.addElement(mid);
 			node.setParent(newRoot);
 			root = newRoot;
-			
+
 			for (int i = 0; i < node.getChildren().size(); i++) {
 				if (i <= median) {
 					left.addChild(i, node.getChildren().get(i));
@@ -172,17 +174,17 @@ public class BTreeImpl<T extends Comparable<T>> implements BTree<T> {
 	}
 
 	private void promote(BNode<T> node) {
-		
+
 		BNode<T> parent = node.getParent();
-		T mid = node.getElementAt(node.getOrder()/2);
+		T mid = node.getElementAt(node.getOrder() / 2);
 		parent.addElement(mid);
-		
+
 		int median = parent.getElements().indexOf(mid);
 		parent.removeChild(node);
-		
+
 		node.getChildren().get(0).setParent(parent);
 		node.getChildren().get(1).setParent(parent);
-		
+
 		node.getParent().removeChild(node);
 		node.getParent().addChild(median, node.getChildren().get(1));
 		node.getParent().addChild(median, node.getChildren().get(0));
