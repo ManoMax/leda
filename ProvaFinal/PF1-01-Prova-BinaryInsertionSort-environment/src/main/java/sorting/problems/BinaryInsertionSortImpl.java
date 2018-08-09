@@ -1,6 +1,7 @@
 package sorting.problems;
 
 import sorting.AbstractSorting;
+import util.Util;
 
 /**
  * Relembre o algoritmo de insertion sort, onde uma lista ordenada é construida 
@@ -28,8 +29,14 @@ public class BinaryInsertionSortImpl<T extends Comparable<T>> extends AbstractSo
 	 */
 	@Override
 	public void sort(T[] array, int leftIndex, int rightIndex) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemente yet!");
+		
+		int finalPosition = leftIndex;
+		
+		while (finalPosition < rightIndex) {
+			Util.swap(array, finalPosition, binarySearch(array, leftIndex, finalPosition, array[finalPosition]));
+			finalPosition++;
+		}
+
 
 	}
 	
@@ -43,9 +50,32 @@ public class BinaryInsertionSortImpl<T extends Comparable<T>> extends AbstractSo
 	 * @param right
 	 * @return
 	 */
-	private int binarySearch(T[] array, int left, int right, int value) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemente yet!");
+	private int binarySearch(T[] array, int left, int right, T value) {
+		
+		int positionOfMin = left;
+		T minValue = value;
+		
+		if (array[getLeft(positionOfMin)] != null) {
+			if (minValue.compareTo(array[getLeft(positionOfMin)]) > 0 && positionOfMin > right)
+				minValue = array[getLeft(positionOfMin)];
+			positionOfMin = binarySearch(array, getLeft(positionOfMin), right, minValue);
+		} 
+		
+		if (array[getRight(positionOfMin)] != null) {
+			if (minValue.compareTo(array[getRight(positionOfMin)]) > 0 && positionOfMin > right)
+				minValue = array[getRight(positionOfMin)];
+			positionOfMin = binarySearch(array, getRight(positionOfMin), right, minValue);
+		}
+
+		return positionOfMin;
+		
 	}
 
+	private int getLeft(int i) {
+		return i * 2 + 1;
+	}
+
+	private int getRight(int i) {
+		return i * 2 + 2;
+	}
 }
