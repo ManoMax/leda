@@ -15,9 +15,6 @@ import adt.bt.Util;
 public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements
 		AVLTree<T> {
 
-	// TODO Do not forget: you must override the methods insert and remove
-	// conveniently.
-
 	// AUXILIARY
 	protected int calculateBalance(BSTNode<T> node) {
 		int leftHeight = super.height((BSTNode<T>) node.getLeft());
@@ -77,8 +74,7 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements
 			parent = (BSTNode<T>) parent.getParent();
 		}
 	}
-	
-	
+		
 	@Override
 	public void insert(T element) {
 		if (element != null) {
