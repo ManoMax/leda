@@ -90,33 +90,24 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 			int left = left(position);
 			int right = right(position);
 			
-			// exibirHeapify(left, position, right);
+			int largest;
 			
-			if (left <= index && right <= index) {
-				if (comparator.compare(heap[left], heap[position]) > 0 || comparator.compare(heap[right], heap[position]) > 0) {
-					
-					if (comparator.compare(heap[right], heap[left]) > 0) {
-						Util.swap(heap, position, right(position));
-						heapify(right(position));
-						
-					} else {
-						Util.swap(heap, position, left(position));
-						heapify(left(position));
-					}
-				}
-			} else if (left <= index) {
-				if (comparator.compare(heap[position], heap[left]) < 0) {
-					
-					Util.swap(heap, position, left(position));
-					heapify(left(position));
-					}
-				}
+			if (left < this.size() && comparator.compare(heap[left], heap[position]) > 0)
+				largest = left;
+			else if (right < this.size() && comparator.compare(heap[right], heap[position]) > 0)
+				largest = right;
+			else
+				largest = position;
 			
+			if (largest != position) {
+				Util.swap(heap, position, largest);
+				heapify(largest);
 			}
+				
 			
-			// exibirHeapify(left, position, right);
-		
 		}
+		
+	}
 	
 	@Override
 	public void insert(T element) {
@@ -127,14 +118,15 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 		// /////////////////////////////////////////////////////////////////
 		// Implemente a insercao na heap aqui.
 		if (element != null) {
-			this.index++;
-			int position = index;
-
-			while(position > 0 && comparator.compare(element, heap[parent(position)]) > 0) {
-				heap[position] = heap[parent(position)];
-				position = parent(position);
+			
+			int i = size();
+			
+			heap[i] = element;
+			
+			while (i > 0 && comparator.compare(heap[i], heap[parent(i)]) > 0) {
+				Util.swap(heap, i, parent(i));
+				i = parent(i);
 			}
-			heap[position] = element;
 		}
 		
 		// visualizarArray(index);
@@ -232,23 +224,6 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 
 	public T[] getHeap() {
 		return heap;
-	}
-
-	// Auxiliares
-	
-	@SuppressWarnings("unused")
-	private void visualizarArray(int index) {
-		for (int i = 0 ; i <= index ; i++) {
-			System.out.println("Posicao: " + i + ": " + heap[i]);
-		}
-		System.out.println("...\n");
-	}
-	
-	@SuppressWarnings("unused")
-	private void exibirHeapify(int left, int position, int right) {
-		System.out.println("Left: " + heap[left] + " Right: " + heap[right] +
-				" Position: " + position + " Parent: " + heap[position]);
-		System.out.println("\n ");
 	}
 	
 }
