@@ -1,7 +1,7 @@
 # LEDA
 💻 Laboratório de Estrutura de Dados e Algorítmos (Java)
 
-// I N C O M P L E T //
+// INCOMPLET //
 
 Códigos revisados em padrões de projeto.
 Com influência de outros códigos.
