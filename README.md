@@ -7,6 +7,7 @@ Códigos revisados em padrões de projeto.
 Com influência de outros códigos.
 
 Agredecimento a:
+
 ° @wesleymonte (https://github.com/wesleymonte);
 
 ° @jmarcelinho (https://github.com/jmarcelinho);
